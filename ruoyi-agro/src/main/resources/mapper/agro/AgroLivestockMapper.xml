@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agro.mapper.AgroLivestockMapper">
+    
+    <resultMap type="AgroLivestock" id="AgroLivestockResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="agroUserId"    column="agro_user_id"    />
+        <result property="agroUserName"    column="agro_user_name"    />
+        <result property="code"    column="code"    />
+        <result property="iccid"    column="iccid"    />
+        <result property="xqIccid"    column="xq_Iccid"    />
+        <result property="livestockType"    column="livestock_type"    />
+        <result property="livestockVarieties"    column="livestock_varieties"    />
+        <result property="outDate"    column="out_date"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="loanDate"    column="loan_date"    />
+        <result property="loanMoney"    column="loan_money"    />
+        <result property="isInsure"    column="is_insure"    />
+        <result property="station"    column="station"    />
+        <result property="remark"    column="remark"    />
+        <result property="image"    column="image"    />
+    </resultMap>
+
+    <sql id="selectAgroLivestockVo">
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, code, iccid, xq_Iccid, livestock_type, livestock_varieties, out_date, birthday, loan_date, loan_money, is_insure, station, remark, image from agro_livestock
+    </sql>
+
+    <select id="selectAgroLivestockList" parameterType="AgroLivestock" resultMap="AgroLivestockResult">
+        <include refid="selectAgroLivestockVo"/>
+        <where>  
+            <if test="agroUserName != null  and agroUserName != ''"> and agro_user_name like concat('%', #{agroUserName}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="iccid != null  and iccid != ''"> and iccid = #{iccid}</if>
+            <if test="xqIccid != null  and xqIccid != ''"> and xq_Iccid = #{xqIccid}</if>
+            <if test="livestockType != null  and livestockType != ''"> and livestock_type = #{livestockType}</if>
+            <if test="livestockVarieties != null  and livestockVarieties != ''"> and livestock_varieties = #{livestockVarieties}</if>
+            <if test="outDate != null "> and out_date = #{outDate}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="isInsure != null  and isInsure != ''"> and is_insure = #{isInsure}</if>
+            <if test="station != null  and station != ''"> and station = #{station}</if>
+        </where>
+    </select>
+    
+    <select id="selectAgroLivestockById" parameterType="String" resultMap="AgroLivestockResult">
+        <include refid="selectAgroLivestockVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAgroLivestock" parameterType="AgroLivestock">
+        insert into agro_livestock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="agroUserId != null">agro_user_id,</if>
+            <if test="agroUserName != null and agroUserName != ''">agro_user_name,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="iccid != null and iccid != ''">iccid,</if>
+            <if test="xqIccid != null">xq_Iccid,</if>
+            <if test="livestockType != null and livestockType != ''">livestock_type,</if>
+            <if test="livestockVarieties != null and livestockVarieties != ''">livestock_varieties,</if>
+            <if test="outDate != null">out_date,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="loanDate != null">loan_date,</if>
+            <if test="loanMoney != null">loan_money,</if>
+            <if test="isInsure != null">is_insure,</if>
+            <if test="station != null">station,</if>
+            <if test="remark != null">remark,</if>
+            <if test="image != null">image,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="agroUserId != null">#{agroUserId},</if>
+            <if test="agroUserName != null and agroUserName != ''">#{agroUserName},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="iccid != null and iccid != ''">#{iccid},</if>
+            <if test="xqIccid != null">#{xqIccid},</if>
+            <if test="livestockType != null and livestockType != ''">#{livestockType},</if>
+            <if test="livestockVarieties != null and livestockVarieties != ''">#{livestockVarieties},</if>
+            <if test="outDate != null">#{outDate},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="loanDate != null">#{loanDate},</if>
+            <if test="loanMoney != null">#{loanMoney},</if>
+            <if test="isInsure != null">#{isInsure},</if>
+            <if test="station != null">#{station},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="image != null">#{image},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAgroLivestock" parameterType="AgroLivestock">
+        update agro_livestock
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="agroUserId != null">agro_user_id = #{agroUserId},</if>
+            <if test="agroUserName != null and agroUserName != ''">agro_user_name = #{agroUserName},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="iccid != null and iccid != ''">iccid = #{iccid},</if>
+            <if test="xqIccid != null">xq_Iccid = #{xqIccid},</if>
+            <if test="livestockType != null and livestockType != ''">livestock_type = #{livestockType},</if>
+            <if test="livestockVarieties != null and livestockVarieties != ''">livestock_varieties = #{livestockVarieties},</if>
+            <if test="outDate != null">out_date = #{outDate},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="loanDate != null">loan_date = #{loanDate},</if>
+            <if test="loanMoney != null">loan_money = #{loanMoney},</if>
+            <if test="isInsure != null">is_insure = #{isInsure},</if>
+            <if test="station != null">station = #{station},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="image != null">image = #{image},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAgroLivestockById" parameterType="String">
+        delete from agro_livestock where id = #{id}
+    </delete>
+
+    <delete id="deleteAgroLivestockByIds" parameterType="String">
+        delete from agro_livestock where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

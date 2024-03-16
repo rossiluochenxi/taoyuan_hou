@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agro.mapper.AgroUserMapper">
+    
+    <resultMap type="AgroUser" id="AgroUserResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="meterinformation"    column="meterinformation"    />
+        <result property="phone"    column="phone"    />
+        <result property="identity"    column="identity"    />
+        <result property="state"    column="state"    />
+        <result property="remark"    column="remark"    />
+        <result property="guid"    column="guid"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="lon"    column="lon"    />
+        <result property="lat"    column="lat"    />
+        <result property="sysUserId"    column="sys_user_id"    />
+        <result property="sysUserName"    column="sys_user_name"    />
+        <result property="station"    column="station"    />
+        <result property="manager"    column="manager"    />
+        <result property="areaId"    column="area_id"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectAgroUserVo">
+        select id, name, meterinformation, phone, identity, state, remark, guid, area_name, lon, lat, sys_user_id, sys_user_name, station, manager, area_id, city_id, province_id, create_by, create_time, update_by, update_time from agro_user
+    </sql>
+
+    <select id="selectAgroUserList" parameterType="AgroUser" resultMap="AgroUserResult">
+        <include refid="selectAgroUserVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="identity != null  and identity != ''"> and identity = #{identity}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
+            <if test="station != null  and station != ''"> and station = #{station}</if>
+            <if test="manager != null  and manager != ''"> and manager = #{manager}</if>
+        </where>
+    </select>
+    
+    <select id="selectAgroUserById" parameterType="String" resultMap="AgroUserResult">
+        <include refid="selectAgroUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAgroUser" parameterType="AgroUser">
+        insert into agro_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="meterinformation != null">meterinformation,</if>
+            <if test="phone != null">phone,</if>
+            <if test="identity != null and identity != ''">identity,</if>
+            <if test="state != null">state,</if>
+            <if test="remark != null">remark,</if>
+            <if test="guid != null">guid,</if>
+            <if test="areaName != null">area_name,</if>
+            <if test="lon != null">lon,</if>
+            <if test="lat != null">lat,</if>
+            <if test="sysUserId != null">sys_user_id,</if>
+            <if test="sysUserName != null">sys_user_name,</if>
+            <if test="station != null">station,</if>
+            <if test="manager != null">manager,</if>
+            <if test="areaId != null">area_id,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="meterinformation != null">#{meterinformation},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="identity != null and identity != ''">#{identity},</if>
+            <if test="state != null">#{state},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="guid != null">#{guid},</if>
+            <if test="areaName != null">#{areaName},</if>
+            <if test="lon != null">#{lon},</if>
+            <if test="lat != null">#{lat},</if>
+            <if test="sysUserId != null">#{sysUserId},</if>
+            <if test="sysUserName != null">#{sysUserName},</if>
+            <if test="station != null">#{station},</if>
+            <if test="manager != null">#{manager},</if>
+            <if test="areaId != null">#{areaId},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAgroUser" parameterType="AgroUser">
+        update agro_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="meterinformation != null">meterinformation = #{meterinformation},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="identity != null and identity != ''">identity = #{identity},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="guid != null">guid = #{guid},</if>
+            <if test="areaName != null">area_name = #{areaName},</if>
+            <if test="lon != null">lon = #{lon},</if>
+            <if test="lat != null">lat = #{lat},</if>
+            <if test="sysUserId != null">sys_user_id = #{sysUserId},</if>
+            <if test="sysUserName != null">sys_user_name = #{sysUserName},</if>
+            <if test="station != null">station = #{station},</if>
+            <if test="manager != null">manager = #{manager},</if>
+            <if test="areaId != null">area_id = #{areaId},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAgroUserById" parameterType="String">
+        delete from agro_user where id = #{id}
+    </delete>
+
+    <delete id="deleteAgroUserByIds" parameterType="String">
+        delete from agro_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
