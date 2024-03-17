@@ -44,7 +44,7 @@ public class DmRtdataController extends BaseController
     public TableDataInfo list(DmRtdata dmRtdata)
     {
         startPage();
-        DmRtdata dvaaa = new DmRtdata();
+        DmRtdata dvaaamjmj = new DmRtdata();
         List<DmRtdata> list = dmRtdataService.selectDmRtdataList(dmRtdata);
         return getDataTable(list);
     }
