@@ -1,6 +1,8 @@
 package com.ruoyi.dm.service;
 
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ruoyi.dm.domain.DmRtdata;
 
 /**
@@ -34,6 +36,15 @@ public interface IDmRtdataService
      * @return 结果
      */
     public int insertDmRtdata(DmRtdata dmRtdata);
+
+
+    /**
+     * 新增冻结数据
+     *
+     * @param
+     * @return 结果
+     */
+    public void mqttDmRtdata() throws JsonProcessingException;
 
     /**
      * 修改冻结数据

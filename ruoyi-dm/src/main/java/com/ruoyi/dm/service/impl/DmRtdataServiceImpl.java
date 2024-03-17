@@ -1,7 +1,13 @@
 package com.ruoyi.dm.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.mqtt.PushCallback;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +26,9 @@ public class DmRtdataServiceImpl implements IDmRtdataService
 {
     @Autowired
     private DmRtdataMapper dmRtdataMapper;
+
+    @Autowired
+    private PushCallback pushCallback;
 
     /**
      * 查询冻结数据
@@ -58,6 +67,38 @@ public class DmRtdataServiceImpl implements IDmRtdataService
         dmRtdata.setId(IdUtils.randomUUID());
         dmRtdata.setCreateTime(DateUtils.getNowDate());
         return dmRtdataMapper.insertDmRtdata(dmRtdata);
+    }
+
+    @Override
+    public void mqttDmRtdata() throws JsonProcessingException {
+        String data= pushCallback.receive();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode1 = objectMapper.readTree(data);
+        String createBy = jsonNode1.get("_msg").asText();
+        JsonNode jsonNode = objectMapper.readTree(createBy);
+        DmRtdata dmRtdata = new DmRtdata();
+        dmRtdata.setAgroLivestockCode(jsonNode.get("agroLivestockCode").asText());
+        dmRtdata.setAgroLivestockIccid(jsonNode.get("agroLivestockIccid").asText());
+        dmRtdata.setAgroLivestockXqiccid(jsonNode.get("agroLivestockXqiccid").asText());
+        dmRtdata.setImei(jsonNode.get("imei").asText());
+        dmRtdata.setDeviceId(jsonNode.get("deviceId").asText());
+        BigDecimal temperature = new BigDecimal(jsonNode.get("temperature").asText());
+        dmRtdata.setTemperature(temperature);
+        dmRtdata.setStep(jsonNode.get("step").asText());
+        BigDecimal weight = new BigDecimal(jsonNode.get("weight").asText());
+        dmRtdata.setWeight(weight);
+        dmRtdata.setLivestockLon(jsonNode.get("livestockLon").asText());
+        dmRtdata.setLivestockLat(jsonNode.get("livestockLat").asText());
+
+        dmRtdata.setRsrp(Long.parseLong(jsonNode.get("rsrp").asText()));
+        dmRtdata.setEcl(Long.parseLong(jsonNode.get("ecl").asText()));
+        dmRtdata.setRsrq(Long.parseLong(jsonNode.get("rsrq").asText()));
+        dmRtdata.setSnr(Long.parseLong(jsonNode.get("snr").asText()));
+        dmRtdata.setCellid(jsonNode.get("cellid").asText());
+        dmRtdata.setPci(jsonNode.get("pci").asText());
+        this.insertDmRtdata(dmRtdata);
+        System.out.println("到这里了吗");
+
     }
 
     /**
