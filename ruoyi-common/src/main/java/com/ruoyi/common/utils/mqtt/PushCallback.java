@@ -52,39 +52,7 @@ public class PushCallback implements MqttCallback {
         _topic = topic;
         _qos = mqttMessage.getQos()+"";
         _msg = new String(mqttMessage.getPayload());
-//        System.out.println("线程名称：【" + Thread.currentThread().getName() + "】");
-//        DmRtdata dmRtdata = new DmRtdata();
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        JsonNode jsonNode = objectMapper.readTree(_msg);
-//        dmRtdata.setAgroLivestockCode(jsonNode.get("agroLivestockCode").asText());
-//        dmRtdata.setAgroLivestockIccid(jsonNode.get("agroLivestockIccid").asText());
-//        dmRtdata.setAgroLivestockXqiccid(jsonNode.get("agroLivestockXqiccid").asText());
-//        dmRtdata.setImei(jsonNode.get("imei").asText());
-//        dmRtdata.setDeviceId(jsonNode.get("deviceId").asText());
-//        BigDecimal temperature = new BigDecimal(jsonNode.get("temperature").asText());
-//        dmRtdata.setTemperature(temperature);
-//        dmRtdata.setStep(jsonNode.get("step").asText());
-//        BigDecimal weight = new BigDecimal(jsonNode.get("weight").asText());
-//        dmRtdata.setWeight(weight);
-//        dmRtdata.setLivestockLon(jsonNode.get("livestockLon").asText());
-//        dmRtdata.setLivestockLat(jsonNode.get("livestockLat").asText());
-//
-//        dmRtdata.setRsrp(Long.parseLong(jsonNode.get("rsrp").asText()));
-//        dmRtdata.setEcl(Long.parseLong(jsonNode.get("ecl").asText()));
-//        dmRtdata.setRsrq(Long.parseLong(jsonNode.get("rsrq").asText()));
-//        dmRtdata.setSnr(Long.parseLong(jsonNode.get("snr").asText()));
-//        dmRtdata.setCellid(jsonNode.get("cellid").asText());
-//        dmRtdata.setPci(jsonNode.get("pci").asText());
-//        dmRtdataServiceImpl.insertDmRtdata(dmRtdata);
-//        if(StringUtils.isNotEmpty(_msg)&&!"close".equals(_msg)){
-//            logger.info("处理消息``````````````````` : "+_msg);
-//
-//            AjaxResult ac  = mqttPushClient.publish(1,false,"deviceIotTest0",_msg);
-//            logger.info("``````````````````` : "+ac);
-//        }
-
-
-    }
+ }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
