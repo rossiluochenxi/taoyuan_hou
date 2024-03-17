@@ -35,8 +35,7 @@ public class DmRtdataController extends BaseController
 {
     @Autowired
     private IDmRtdataService dmRtdataService;
-   @Autowired
-    private PushCallback pushCallback;
+
     /**
      * 查询冻结数据列表
      */
@@ -45,7 +44,7 @@ public class DmRtdataController extends BaseController
     public TableDataInfo list(DmRtdata dmRtdata)
     {
         startPage();
-        DmRtdata dvaaasunsunsun = new DmRtdata();
+        DmRtdata dvaaa = new DmRtdata();
         List<DmRtdata> list = dmRtdataService.selectDmRtdataList(dmRtdata);
         return getDataTable(list);
     }
