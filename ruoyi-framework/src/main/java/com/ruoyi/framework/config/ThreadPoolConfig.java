@@ -2,6 +2,7 @@ package com.ruoyi.framework.config;
 
 import com.ruoyi.common.utils.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -9,6 +10,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.springframework.context.ApplicationContext;
+
 
 /**
  * 线程池配置
@@ -44,6 +47,7 @@ public class ThreadPoolConfig
         return executor;
     }
 
+
     /**
      * 执行周期性或定时任务
      */
@@ -61,6 +65,26 @@ public class ThreadPoolConfig
                 Threads.printException(r, t);
             }
         };
+    }
+
+
+
+
+    // mqtt线程池...
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Bean(name = "mqttMessageThreadPoolTaskExecutor")
+    public ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setMaxPoolSize(maxPoolSize);
+        executor.setCorePoolSize(corePoolSize);
+        executor.setQueueCapacity(queueCapacity);
+        executor.setKeepAliveSeconds(keepAliveSeconds);
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.initialize();
+        return executor;
     }
 
 
