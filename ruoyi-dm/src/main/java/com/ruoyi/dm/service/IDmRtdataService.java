@@ -38,13 +38,7 @@ public interface IDmRtdataService
     public int insertDmRtdata(DmRtdata dmRtdata);
 
 
-    /**
-     * 新增冻结数据
-     *
-     * @param
-     * @return 结果
-     */
-    public void mqttDmRtdata() throws JsonProcessingException;
+
 
     /**
      * 修改冻结数据

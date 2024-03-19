@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
-import org.springframework.context.ApplicationContext;
+//import org.springframework.context.ApplicationContext;
 
 
 /**
@@ -72,8 +72,8 @@ public class ThreadPoolConfig
 
     // mqtt线程池...
 
-    @Autowired
-    private ApplicationContext applicationContext;
+//    @Autowired
+//    private ApplicationContext applicationContext;
 
     @Bean(name = "mqttMessageThreadPoolTaskExecutor")
     public ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor() {

@@ -1,9 +1,8 @@
 package com.ruoyi.common.utils.mqtt;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.StringUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ruoyi.common.Business.BusinessService;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -11,12 +10,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.math.BigDecimal;
 
 
 @Component
@@ -35,7 +30,7 @@ public class PushCallback implements MqttCallback {
     private static String _msg;
 
     @Autowired
-    private ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor;
+   private ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor;
 
     @Override
     public void connectionLost(Throwable throwable) {
@@ -46,10 +41,16 @@ public class PushCallback implements MqttCallback {
         }
     }
 
+    @Autowired
+    private BusinessService businessService;
+
+    public void PushCallback(BusinessService businessService) {
+        this.businessService = businessService;
+    }
+
     @Override
-//    @Async("threadPoolTaskExecutor")// 提交到线程池中去处理
      public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-        mqttMessageThreadPoolTaskExecutor.execute(() -> {
+      mqttMessageThreadPoolTaskExecutor.execute(() -> {
             // 在线程池中处理消息
             logger.info("接收消息主题 : " + topic);
             logger.info("接收消息Qos : " + mqttMessage.getQos());
@@ -57,12 +58,21 @@ public class PushCallback implements MqttCallback {
             _topic = topic;
             _qos = mqttMessage.getQos() + "";
             _msg = new String(mqttMessage.getPayload());
-
-            // 打印线程信息
+            Mqttobj mObj= new Mqttobj();
+              mObj.setTopic(_topic);
+              mObj.setQos(_qos);
+              mObj.setMsg(_msg);
+             //打印线程信息
             Thread currentThread = Thread.currentThread();
             logger.info("Thread Name: " + currentThread.getName());
             logger.info("Thread ID: " + currentThread.getId());
-        });
+          try {
+              String result= businessService.processBusinessLogic(mObj);
+              logger.info("返回值 : " + result);
+          } catch (JsonProcessingException e) {
+              e.printStackTrace();
+          }
+      });
  }
 
     @Override

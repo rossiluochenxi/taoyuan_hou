@@ -18,6 +18,8 @@ public class MqttPushClient {
     @Autowired
     private PushCallback pushCallback;
 
+
+
     private static MqttClient client;
 
     private static MqttClient getClient() {
