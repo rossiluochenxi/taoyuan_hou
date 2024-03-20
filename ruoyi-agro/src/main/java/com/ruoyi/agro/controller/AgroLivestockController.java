@@ -89,7 +89,7 @@ public class AgroLivestockController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody AgroLivestock agroLivestock)
     {
-        agroLivestock.setCreateBy(getUsername());
+        agroLivestock.setUpdateBy(getUsername());
         return toAjax(agroLivestockService.updateAgroLivestock(agroLivestock));
     }
 

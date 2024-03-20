@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agro.mapper.AgroLivestockTypeMapper">
+    
+    <resultMap type="AgroLivestockType" id="AgroLivestockTypeResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="livestockType"    column="livestock_type"    />
+    </resultMap>
+
+    <sql id="selectAgroLivestockTypeVo">
+        select id, create_by, create_time, update_by, livestock_type from agro_livestock_type
+    </sql>
+
+    <select id="selectAgroLivestockTypeList" parameterType="AgroLivestockType" resultMap="AgroLivestockTypeResult">
+        <include refid="selectAgroLivestockTypeVo"/>
+        <where>  
+            <if test="livestockType != null  and livestockType != ''"> and livestock_type = #{livestockType}</if>
+        </where>
+    </select>
+    
+    <select id="selectAgroLivestockTypeById" parameterType="String" resultMap="AgroLivestockTypeResult">
+        <include refid="selectAgroLivestockTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAgroLivestockType" parameterType="AgroLivestockType">
+        insert into agro_livestock_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="livestockType != null">livestock_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="livestockType != null">#{livestockType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAgroLivestockType" parameterType="AgroLivestockType">
+        update agro_livestock_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="livestockType != null">livestock_type = #{livestockType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAgroLivestockTypeById" parameterType="String">
+        delete from agro_livestock_type where id = #{id}
+    </delete>
+
+    <delete id="deleteAgroLivestockTypeByIds" parameterType="String">
+        delete from agro_livestock_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

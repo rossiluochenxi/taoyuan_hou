@@ -84,7 +84,7 @@ public class AgroUserController extends BaseController {
     @Log(title = "养殖户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody AgroUser agroUser) {
-        agroUser.setCreateBy(getUsername());
+        agroUser.setUpdateBy(getUsername());
         return toAjax(agroUserService.updateAgroUser(agroUser));
     }
 
