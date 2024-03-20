@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dm.mapper.DmDataMapper">
+    
+    <resultMap type="DmData" id="DmDataResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="agroUserId"    column="agro_user_id"    />
+        <result property="agroUserName"    column="agro_user_name"    />
+        <result property="agroLivestockId"    column="agro_livestock_id"    />
+        <result property="agroLivestockCode"    column="agro_livestock_code"    />
+        <result property="agroLivestockIccid"    column="agro_livestock_iccid"    />
+        <result property="agroLivestockXqiccid"    column="agro_livestock_xqiccid"    />
+        <result property="imei"    column="imei"    />
+        <result property="deviceId"    column="device_id"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="step"    column="step"    />
+        <result property="weight"    column="weight"    />
+        <result property="livestockLon"    column="livestock_lon"    />
+        <result property="livestockLat"    column="livestock_lat"    />
+        <result property="rsrq"    column="rsrq"    />
+        <result property="ecl"    column="ecl"    />
+        <result property="cellid"    column="cellid"    />
+        <result property="snr"    column="snr"    />
+        <result property="rsrp"    column="rsrp"    />
+        <result property="pci"    column="pci"    />
+        <result property="date"    column="date"    />
+    </resultMap>
+
+    <sql id="selectDmDataVo">
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, date from dm_data
+    </sql>
+
+    <select id="selectDmDataList" parameterType="DmData" resultMap="DmDataResult">
+        <include refid="selectDmDataVo"/>
+        <where>  
+            <if test="agroUserName != null  and agroUserName != ''"> and agro_user_name like concat('%', #{agroUserName}, '%')</if>
+            <if test="agroLivestockId != null  and agroLivestockId != ''"> and agro_livestock_id = #{agroLivestockId}</if>
+            <if test="agroLivestockCode != null  and agroLivestockCode != ''"> and agro_livestock_code = #{agroLivestockCode}</if>
+            <if test="agroLivestockIccid != null  and agroLivestockIccid != ''"> and agro_livestock_iccid = #{agroLivestockIccid}</if>
+            <if test="agroLivestockXqiccid != null  and agroLivestockXqiccid != ''"> and agro_livestock_xqiccid = #{agroLivestockXqiccid}</if>
+            <if test="temperature != null "> and temperature = #{temperature}</if>
+            <if test="step != null  and step != ''"> and step = #{step}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="livestockLon != null  and livestockLon != ''"> and livestock_lon = #{livestockLon}</if>
+            <if test="livestockLat != null  and livestockLat != ''"> and livestock_lat = #{livestockLat}</if>
+            <if test="rsrq != null "> and rsrq = #{rsrq}</if>
+            <if test="ecl != null "> and ecl = #{ecl}</if>
+            <if test="cellid != null  and cellid != ''"> and cellid = #{cellid}</if>
+            <if test="snr != null "> and snr = #{snr}</if>
+            <if test="rsrp != null "> and rsrp = #{rsrp}</if>
+            <if test="pci != null  and pci != ''"> and pci = #{pci}</if>
+            <if test="date != null "> and date = #{date}</if>
+        </where>
+    </select>
+    
+    <select id="selectDmDataById" parameterType="String" resultMap="DmDataResult">
+        <include refid="selectDmDataVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDmData" parameterType="DmData">
+        insert into dm_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="agroUserId != null">agro_user_id,</if>
+            <if test="agroUserName != null">agro_user_name,</if>
+            <if test="agroLivestockId != null">agro_livestock_id,</if>
+            <if test="agroLivestockCode != null">agro_livestock_code,</if>
+            <if test="agroLivestockIccid != null">agro_livestock_iccid,</if>
+            <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid,</if>
+            <if test="imei != null">imei,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="step != null">step,</if>
+            <if test="weight != null">weight,</if>
+            <if test="livestockLon != null">livestock_lon,</if>
+            <if test="livestockLat != null">livestock_lat,</if>
+            <if test="rsrq != null">rsrq,</if>
+            <if test="ecl != null">ecl,</if>
+            <if test="cellid != null">cellid,</if>
+            <if test="snr != null">snr,</if>
+            <if test="rsrp != null">rsrp,</if>
+            <if test="pci != null">pci,</if>
+            <if test="date != null">date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="agroUserId != null">#{agroUserId},</if>
+            <if test="agroUserName != null">#{agroUserName},</if>
+            <if test="agroLivestockId != null">#{agroLivestockId},</if>
+            <if test="agroLivestockCode != null">#{agroLivestockCode},</if>
+            <if test="agroLivestockIccid != null">#{agroLivestockIccid},</if>
+            <if test="agroLivestockXqiccid != null">#{agroLivestockXqiccid},</if>
+            <if test="imei != null">#{imei},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="step != null">#{step},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="livestockLon != null">#{livestockLon},</if>
+            <if test="livestockLat != null">#{livestockLat},</if>
+            <if test="rsrq != null">#{rsrq},</if>
+            <if test="ecl != null">#{ecl},</if>
+            <if test="cellid != null">#{cellid},</if>
+            <if test="snr != null">#{snr},</if>
+            <if test="rsrp != null">#{rsrp},</if>
+            <if test="pci != null">#{pci},</if>
+            <if test="date != null">#{date},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDmData" parameterType="DmData">
+        update dm_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="agroUserId != null">agro_user_id = #{agroUserId},</if>
+            <if test="agroUserName != null">agro_user_name = #{agroUserName},</if>
+            <if test="agroLivestockId != null">agro_livestock_id = #{agroLivestockId},</if>
+            <if test="agroLivestockCode != null">agro_livestock_code = #{agroLivestockCode},</if>
+            <if test="agroLivestockIccid != null">agro_livestock_iccid = #{agroLivestockIccid},</if>
+            <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid = #{agroLivestockXqiccid},</if>
+            <if test="imei != null">imei = #{imei},</if>
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="step != null">step = #{step},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="livestockLon != null">livestock_lon = #{livestockLon},</if>
+            <if test="livestockLat != null">livestock_lat = #{livestockLat},</if>
+            <if test="rsrq != null">rsrq = #{rsrq},</if>
+            <if test="ecl != null">ecl = #{ecl},</if>
+            <if test="cellid != null">cellid = #{cellid},</if>
+            <if test="snr != null">snr = #{snr},</if>
+            <if test="rsrp != null">rsrp = #{rsrp},</if>
+            <if test="pci != null">pci = #{pci},</if>
+            <if test="date != null">date = #{date},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDmDataById" parameterType="String">
+        delete from dm_data where id = #{id}
+    </delete>
+
+    <delete id="deleteDmDataByIds" parameterType="String">
+        delete from dm_data where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

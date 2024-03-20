@@ -9,12 +9,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 冻结数据对象 dm_rtdata
+ * 每天数据对象 dm_day_data
  * 
  * @author 罗晨熙
- * @date 2024-03-16
+ * @date 2024-03-19
  */
-public class DmRtdata extends BaseEntity
+public class DmDayData extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -61,12 +61,12 @@ public class DmRtdata extends BaseEntity
     @Excel(name = "体重")
     private BigDecimal weight;
 
-    /** 经度 */
-    @Excel(name = "经度")
+    /** 牲畜所在经度 */
+    @Excel(name = "牲畜所在经度")
     private String livestockLon;
 
-    /** 纬度 */
-    @Excel(name = "纬度")
+    /** 牲畜所在纬度 */
+    @Excel(name = "牲畜所在纬度")
     private String livestockLat;
 
     /** rsrq */
@@ -94,8 +94,8 @@ public class DmRtdata extends BaseEntity
     private String pci;
 
     /** 上传时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date date;
 
     public void setId(String id) 

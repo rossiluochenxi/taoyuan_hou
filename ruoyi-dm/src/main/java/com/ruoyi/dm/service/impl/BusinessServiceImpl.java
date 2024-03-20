@@ -5,29 +5,48 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.Business.BusinessService;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.http.HttpHelper;
 import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.dm.domain.DmRtdata;
+import com.ruoyi.dm.mapper.DmDataMapper;
+import com.ruoyi.dm.mapper.DmDayDataMapper;
 import com.ruoyi.dm.mapper.DmRtdataMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Component
 public class BusinessServiceImpl implements BusinessService {
+    //冻结数据
     @Autowired
     private DmRtdataMapper dmRtdataMapper;
+    //全部数据
+    @Autowired
+    private DmDataMapper dmDataMapper;
+    //每天数据
+    @Autowired
+    private DmDayDataMapper dmDayDataMapper;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BusinessService.class);
 
     /**
      * 处理mqtt消息业务类
+     *
      * @param mqttobj
      * @return
      * @throws JsonProcessingException
      */
     @Override
     public String processBusinessLogic(Mqttobj mqttobj) throws JsonProcessingException {
-  // 处理 MQTT 消息的业务逻辑
+        // 处理 MQTT 消息的业务逻辑
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(mqttobj.getMsg());
         DmRtdata dmRtdata = new DmRtdata();
@@ -49,8 +68,11 @@ public class BusinessServiceImpl implements BusinessService {
         dmRtdata.setSnr(Long.parseLong(jsonNode.get("snr").asText()));
         dmRtdata.setCellid(jsonNode.get("cellid").asText());
         dmRtdata.setPci(jsonNode.get("pci").asText());
-        dmRtdata.setCreateTime(DateUtils.getNowDate());
+        dmRtdata.setCreateTime(DateUtils.parseDate(DateUtils.getTime()));
+
         dmRtdata.setId(IdUtils.randomUUID());
-        return  String.valueOf(dmRtdataMapper.insertDmRtdata(dmRtdata));
+        dmRtdataMapper.insertDmRtdata(dmRtdata);
+
+        return "1";
     }
 }

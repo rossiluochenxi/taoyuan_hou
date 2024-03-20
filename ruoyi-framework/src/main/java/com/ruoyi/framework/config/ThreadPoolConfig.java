@@ -68,13 +68,9 @@ public class ThreadPoolConfig
     }
 
 
-
-
-    // mqtt线程池...
-
-//    @Autowired
-//    private ApplicationContext applicationContext;
-
+    /**
+     *     mqtt线程池
+     */
     @Bean(name = "mqttMessageThreadPoolTaskExecutor")
     public ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
