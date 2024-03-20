@@ -166,4 +166,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <insert id="insertOrUpdateDmDayData" parameterType="DmDayData">
+        INSERT INTO dm_day_data (id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`)
+        VALUES (#{id}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{agroUserId}, #{agroUserName}, #{agroLivestockId}, #{agroLivestockCode}, #{agroLivestockIccid}, #{agroLivestockXqiccid}, #{imei}, #{deviceId}, #{temperature}, #{step}, #{weight}, #{livestockLon}, #{livestockLat}, #{rsrq}, #{ecl}, #{cellid}, #{snr}, #{rsrp}, #{pci}, #{date})
+            ON DUPLICATE KEY UPDATE
+             id=VALUES(id), create_by=VALUES(create_by), create_time=VALUES(create_time), update_by=VALUES(update_by), update_time=VALUES(update_time), agro_user_id=VALUES(agro_user_id), agro_user_name=VALUES(agro_user_name), agro_livestock_id=VALUES(agro_livestock_id), agro_livestock_code=VALUES(agro_livestock_code), agro_livestock_iccid=VALUES(agro_livestock_iccid), agro_livestock_xqiccid=VALUES(agro_livestock_xqiccid), imei=VALUES(imei), device_id=VALUES(device_id), temperature=VALUES(temperature), step=VALUES(step), weight=VALUES(weight), livestock_lon=VALUES(livestock_lon), livestock_lat=VALUES(livestock_lat), rsrq=VALUES(rsrq), ecl=VALUES(ecl), cellid=VALUES(cellid), snr=VALUES(snr), rsrp=VALUES(rsrp), pci=VALUES(pci), date=VALUES(`date`)
+    </insert>
 </mapper>

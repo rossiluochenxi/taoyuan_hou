@@ -3,6 +3,7 @@ package com.ruoyi.dm.service;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.dm.domain.DmRtdata;
 
 /**
@@ -63,4 +64,10 @@ public interface IDmRtdataService
      * @return 结果
      */
     public int deleteDmRtdataById(String id);
+
+    /**
+     * 冻结数据
+     */
+
+    public String deviceInsertDmRtdata(Mqttobj mqttobj) throws JsonProcessingException;
 }

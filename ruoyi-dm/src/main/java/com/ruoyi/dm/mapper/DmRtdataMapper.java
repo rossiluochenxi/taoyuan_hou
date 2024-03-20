@@ -1,6 +1,8 @@
 package com.ruoyi.dm.mapper;
 
 import java.util.List;
+
+import com.ruoyi.dm.domain.DmDayData;
 import com.ruoyi.dm.domain.DmRtdata;
 
 /**
@@ -58,4 +60,11 @@ public interface DmRtdataMapper
      * @return 结果
      */
     public int deleteDmRtdataByIds(String[] ids);
+
+    /**
+     * 添加或则修改实时冻结数据
+     * @param dmRtdata
+     * @return
+     */
+    public int insertOrUpdateDmRtdata(DmRtdata dmRtdata);
 }

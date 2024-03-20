@@ -19,6 +19,15 @@ public interface AgroLivestockMapper
      */
     public AgroLivestock selectAgroLivestockById(String id);
 
+
+    /**
+     * 查询牲畜档案管理
+     *
+     * @param
+     * @return 牲畜档案管理
+     */
+    public AgroLivestock selectAgroLivestockByIccid(String iccid);
+
     /**
      * 查询牲畜档案管理列表
      * 

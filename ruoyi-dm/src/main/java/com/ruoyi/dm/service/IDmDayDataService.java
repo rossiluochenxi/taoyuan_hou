@@ -1,6 +1,9 @@
 package com.ruoyi.dm.service;
 
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.dm.domain.DmDayData;
 
 /**
@@ -58,4 +61,9 @@ public interface IDmDayDataService
      * @return 结果
      */
     public int deleteDmDayDataById(String id);
+    /**
+     * 每天数据新增
+     */
+
+    public String deviceInsertDmDayData(Mqttobj mqttobj) throws JsonProcessingException;
 }

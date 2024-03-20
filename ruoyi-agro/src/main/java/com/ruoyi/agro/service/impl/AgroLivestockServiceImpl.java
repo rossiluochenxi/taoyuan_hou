@@ -95,4 +95,20 @@ public class AgroLivestockServiceImpl implements IAgroLivestockService
     {
         return agroLivestockMapper.deleteAgroLivestockById(id);
     }
+
+    /**
+     * 查询牲畜档案管理
+     *
+     * @param iccid 牲畜档案管理设备号
+     * @return 牲畜档案管理
+     */
+    @Override
+    public AgroLivestock selectAgroLivestockByIccid(String iccid)
+    {
+        return agroLivestockMapper.selectAgroLivestockByIccid(iccid);
+    }
+
+
+
+
 }

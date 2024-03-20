@@ -58,4 +58,12 @@ public interface DmDayDataMapper
      * @return 结果
      */
     public int deleteDmDayDataByIds(String[] ids);
+
+    /**
+     * 添加或则修改每天设备数据
+     * @param dmDayData
+     * @return
+     */
+    public int insertOrUpdateDmDayData(DmDayData dmDayData);
+
 }

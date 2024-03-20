@@ -136,4 +136,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectAgroLivestockByIccid" parameterType="String" resultMap="AgroLivestockResult">
+        <include refid="selectAgroLivestockVo"/>
+        where iccid = #{iccid}
+    </select>
+
+
 </mapper>

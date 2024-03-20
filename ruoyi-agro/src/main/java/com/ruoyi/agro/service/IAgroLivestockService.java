@@ -58,4 +58,7 @@ public interface IAgroLivestockService
      * @return 结果
      */
     public int deleteAgroLivestockById(String id);
+
+    public AgroLivestock selectAgroLivestockByIccid(String id);
+
 }

@@ -68,6 +68,7 @@ public class PushCallback implements MqttCallback {
             logger.info("Thread ID: " + currentThread.getId());
           try {
               String result= businessService.processBusinessLogic(mObj);
+              // TODO: 2024/3/20  下行消息
               logger.info("返回值 : " + result);
           } catch (JsonProcessingException e) {
               e.printStackTrace();
