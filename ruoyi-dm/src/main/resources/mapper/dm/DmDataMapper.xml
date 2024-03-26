@@ -30,10 +30,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="rsrp"    column="rsrp"    />
         <result property="pci"    column="pci"    />
         <result property="date"    column="date"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectDmDataVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, date from dm_data
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_data t
     </sql>
 
     <select id="selectDmDataList" parameterType="DmData" resultMap="DmDataResult">
@@ -55,7 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="snr != null "> and snr = #{snr}</if>
             <if test="rsrp != null "> and rsrp = #{rsrp}</if>
             <if test="pci != null  and pci != ''"> and pci = #{pci}</if>
-            <if test="date != null "> and date = #{date}</if>
+            <if test="date != null "> and `date` = #{date}</if>
+            ${params.dataScope}
         </where>
     </select>
     
@@ -91,8 +94,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="snr != null">snr,</if>
             <if test="rsrp != null">rsrp,</if>
             <if test="pci != null">pci,</if>
-            <if test="date != null">date,</if>
-         </trim>
+            <if test="date != null">`date`,</if>
+
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -119,6 +126,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rsrp != null">#{rsrp},</if>
             <if test="pci != null">#{pci},</if>
             <if test="date != null">#{date},</if>
+
+
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 

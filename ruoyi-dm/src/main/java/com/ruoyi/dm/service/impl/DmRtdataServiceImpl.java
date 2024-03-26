@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.agro.domain.AgroLivestock;
 import com.ruoyi.agro.service.impl.AgroLivestockServiceImpl;
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -50,6 +51,7 @@ public class DmRtdataServiceImpl implements IDmRtdataService {
      * @return 冻结数据
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<DmRtdata> selectDmRtdataList(DmRtdata dmRtdata) {
         return dmRtdataMapper.selectDmRtdataList(dmRtdata);
     }
@@ -144,6 +146,8 @@ public class DmRtdataServiceImpl implements IDmRtdataService {
             dmRtdata.setAgroLivestockId(agroLivestock.getId());
             dmRtdata.setAgroLivestockCode(agroLivestock.getCode());
             dmRtdata.setAgroLivestockXqiccid(agroLivestock.getXqIccid());
+            dmRtdata.setUserId(agroLivestock.getUserId());
+            dmRtdata.setDeptId(agroLivestock.getDeptId());
             dmRtdataMapper.insertOrUpdateDmRtdata(dmRtdata);
         }
         return null;

@@ -98,6 +98,34 @@ public class DmRtdata extends BaseEntity
     @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
+    /** 用户id */
+//    @Excel(name = "user_id")
+    private String userId;
+
+
+    /** 部门id */
+//    @Excel(name = "dept_id")
+    private String deptId;
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+
+
     public void setId(String id) 
     {
         this.id = id;

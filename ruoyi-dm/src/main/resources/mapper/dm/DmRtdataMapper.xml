@@ -30,10 +30,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="rsrp"    column="rsrp"    />
         <result property="pci"    column="pci"    />
         <result property="date"    column="date"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectDmRtdataVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, date from dm_rtdata
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_rtdata t
     </sql>
 
     <select id="selectDmRtdataList" parameterType="DmRtdata" resultMap="DmRtdataResult">
@@ -53,7 +55,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="snr != null "> and snr = #{snr}</if>
             <if test="rsrp != null "> and rsrp = #{rsrp}</if>
             <if test="pci != null  and pci != ''"> and pci = #{pci}</if>
-            <if test="date != null "> and date = #{date}</if>
+            <if test="date != null "> and `date` = #{date}</if>
+            ${params.dataScope}
+
         </where>
     </select>
     
@@ -89,7 +93,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="snr != null">snr,</if>
             <if test="rsrp != null">rsrp,</if>
             <if test="pci != null">pci,</if>
-            <if test="date != null">date,</if>
+            <if test="date != null">`date`,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -117,6 +123,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rsrp != null">#{rsrp},</if>
             <if test="pci != null">#{pci},</if>
             <if test="date != null">#{date},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 
@@ -146,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="snr != null">snr = #{snr},</if>
             <if test="rsrp != null">rsrp = #{rsrp},</if>
             <if test="pci != null">pci = #{pci},</if>
-            <if test="date != null">date = #{date},</if>
+            <if test="date != null">`date` = #{date},</if>
         </trim>
         where id = #{id}
     </update>
@@ -164,9 +172,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <insert id="insertOrUpdateDmRtdata" parameterType="DmRtdata">
-        INSERT INTO dm_rtdata (id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci)
-        VALUES (#{id}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{agroUserId}, #{agroUserName}, #{agroLivestockId}, #{agroLivestockCode}, #{agroLivestockIccid}, #{agroLivestockXqiccid}, #{imei}, #{deviceId}, #{temperature}, #{step}, #{weight}, #{livestockLon}, #{livestockLat}, #{rsrq}, #{ecl}, #{cellid}, #{snr}, #{rsrp}, #{pci})
+        INSERT INTO dm_rtdata (id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci,user_id,dept_id)
+        VALUES (#{id}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{agroUserId}, #{agroUserName}, #{agroLivestockId}, #{agroLivestockCode}, #{agroLivestockIccid}, #{agroLivestockXqiccid}, #{imei}, #{deviceId}, #{temperature}, #{step}, #{weight}, #{livestockLon}, #{livestockLat}, #{rsrq}, #{ecl}, #{cellid}, #{snr}, #{rsrp}, #{pci}, #{userId}, #{deptId})
             ON DUPLICATE KEY UPDATE
-                                 id=VALUES(id), create_by=VALUES(create_by), create_time=VALUES(create_time), update_by=VALUES(update_by), update_time=VALUES(update_time), agro_user_id=VALUES(agro_user_id), agro_user_name=VALUES(agro_user_name), agro_livestock_id=VALUES(agro_livestock_id), agro_livestock_code=VALUES(agro_livestock_code), agro_livestock_iccid=VALUES(agro_livestock_iccid), agro_livestock_xqiccid=VALUES(agro_livestock_xqiccid), imei=VALUES(imei), device_id=VALUES(device_id), temperature=VALUES(temperature), step=VALUES(step), weight=VALUES(weight), livestock_lon=VALUES(livestock_lon), livestock_lat=VALUES(livestock_lat), rsrq=VALUES(rsrq), ecl=VALUES(ecl), cellid=VALUES(cellid), snr=VALUES(snr), rsrp=VALUES(rsrp), pci=VALUES(pci)
+                                 id=VALUES(id), create_by=VALUES(create_by), create_time=VALUES(create_time), update_by=VALUES(update_by), update_time=VALUES(update_time), agro_user_id=VALUES(agro_user_id), agro_user_name=VALUES(agro_user_name), agro_livestock_id=VALUES(agro_livestock_id), agro_livestock_code=VALUES(agro_livestock_code), agro_livestock_iccid=VALUES(agro_livestock_iccid), agro_livestock_xqiccid=VALUES(agro_livestock_xqiccid), imei=VALUES(imei), device_id=VALUES(device_id), temperature=VALUES(temperature), step=VALUES(step), weight=VALUES(weight), livestock_lon=VALUES(livestock_lon), livestock_lat=VALUES(livestock_lat), rsrq=VALUES(rsrq), ecl=VALUES(ecl), cellid=VALUES(cellid), snr=VALUES(snr), rsrp=VALUES(rsrp), pci=VALUES(pci), user_id=VALUES(user_id), dept_id=VALUES(dept_id)
     </insert>
 </mapper>

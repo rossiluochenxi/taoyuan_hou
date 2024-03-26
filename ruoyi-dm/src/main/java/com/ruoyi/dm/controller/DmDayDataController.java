@@ -77,6 +77,8 @@ public class DmDayDataController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody DmDayData dmDayData)
     {
+        dmDayData.setUserId(getUserId().toString());
+        dmDayData.setDeptId(getDeptId().toString());
         return toAjax(dmDayDataService.insertDmDayData(dmDayData));
     }
 

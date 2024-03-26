@@ -74,6 +74,8 @@ public class AgroUserController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody AgroUser agroUser) {
         agroUser.setCreateBy(getUsername());
+        agroUser.setUserId(getUserId().toString());
+        agroUser.setDeptId(getDeptId().toString());
         return toAjax(agroUserService.insertAgroUser(agroUser));
     }
 

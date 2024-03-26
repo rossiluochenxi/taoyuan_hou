@@ -78,6 +78,8 @@ public class AgroLivestockController extends BaseController
     public AjaxResult add(@RequestBody AgroLivestock agroLivestock)
     {
         agroLivestock.setCreateBy(getUsername());
+        agroLivestock.setUserId(getUserId().toString());
+        agroLivestock.setDeptId(getDeptId().toString());
         return toAjax(agroLivestockService.insertAgroLivestock(agroLivestock));
     }
 

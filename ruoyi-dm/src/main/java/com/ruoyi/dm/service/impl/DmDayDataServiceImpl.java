@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.agro.domain.AgroLivestock;
 import com.ruoyi.agro.service.impl.AgroLivestockServiceImpl;
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -49,6 +50,7 @@ public class DmDayDataServiceImpl implements IDmDayDataService {
      * @return 每天数据
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<DmDayData> selectDmDayDataList(DmDayData dmDayData) {
         return dmDayDataMapper.selectDmDayDataList(dmDayData);
     }
@@ -142,6 +144,9 @@ public class DmDayDataServiceImpl implements IDmDayDataService {
             dmDayData.setAgroLivestockId(agroLivestock.getId());
             dmDayData.setAgroLivestockCode(agroLivestock.getCode());
             dmDayData.setAgroLivestockXqiccid(agroLivestock.getXqIccid());
+            dmDayData.setUserId(agroLivestock.getUserId());
+            dmDayData.setDeptId(agroLivestock.getDeptId());
+
             dmDayDataMapper.insertOrUpdateDmDayData(dmDayData);
             // agroLivestock 对象不为 null
             System.out.println("agroLivestock 对象不为 null");

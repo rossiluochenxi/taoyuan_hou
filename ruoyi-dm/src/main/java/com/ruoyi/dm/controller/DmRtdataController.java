@@ -24,14 +24,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 冻结数据Controller
- * 
+ *
  * @author 罗晨熙
  * @date 2024-03-16
  */
 @RestController
 @RequestMapping("/dm/rtdata")
-public class DmRtdataController extends BaseController
-{
+public class DmRtdataController extends BaseController {
     @Autowired
     private IDmRtdataService dmRtdataService;
 
@@ -40,8 +39,7 @@ public class DmRtdataController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dm:rtdata:list')")
     @GetMapping("/list")
-    public TableDataInfo list(DmRtdata dmRtdata)
-    {
+    public TableDataInfo list(DmRtdata dmRtdata) {
         startPage();
         List<DmRtdata> list = dmRtdataService.selectDmRtdataList(dmRtdata);
         return getDataTable(list);
@@ -53,8 +51,7 @@ public class DmRtdataController extends BaseController
     @PreAuthorize("@ss.hasPermi('dm:rtdata:export')")
     @Log(title = "冻结数据", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, DmRtdata dmRtdata)
-    {
+    public void export(HttpServletResponse response, DmRtdata dmRtdata) {
         List<DmRtdata> list = dmRtdataService.selectDmRtdataList(dmRtdata);
         ExcelUtil<DmRtdata> util = new ExcelUtil<DmRtdata>(DmRtdata.class);
         util.exportExcel(response, list, "冻结数据数据");
@@ -65,8 +62,7 @@ public class DmRtdataController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dm:rtdata:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return success(dmRtdataService.selectDmRtdataById(id));
     }
 
@@ -76,9 +72,10 @@ public class DmRtdataController extends BaseController
     @PreAuthorize("@ss.hasPermi('dm:rtdata:add')")
     @Log(title = "冻结数据", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody DmRtdata dmRtdata)
-    {
-      dmRtdata.setCreateBy(getUsername());
+    public AjaxResult add(@RequestBody DmRtdata dmRtdata) {
+        dmRtdata.setUserId(getUserId().toString());
+        dmRtdata.setDeptId(getDeptId().toString());
+        dmRtdata.setCreateBy(getUsername());
         return toAjax(dmRtdataService.insertDmRtdata(dmRtdata));
     }
 
@@ -88,9 +85,8 @@ public class DmRtdataController extends BaseController
     @PreAuthorize("@ss.hasPermi('dm:rtdata:edit')")
     @Log(title = "冻结数据", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody DmRtdata dmRtdata)
-    {
- dmRtdata.setCreateBy(getUsername());
+    public AjaxResult edit(@RequestBody DmRtdata dmRtdata) {
+        dmRtdata.setCreateBy(getUsername());
         return toAjax(dmRtdataService.updateDmRtdata(dmRtdata));
     }
 
@@ -99,9 +95,8 @@ public class DmRtdataController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dm:rtdata:remove')")
     @Log(title = "冻结数据", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(dmRtdataService.deleteDmRtdataByIds(ids));
     }
 }

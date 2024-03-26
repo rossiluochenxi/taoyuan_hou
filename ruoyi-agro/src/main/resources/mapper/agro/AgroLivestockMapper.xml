@@ -25,10 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="station"    column="station"    />
         <result property="remark"    column="remark"    />
         <result property="image"    column="image"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectAgroLivestockVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, code, iccid, xq_Iccid, livestock_type, livestock_varieties, out_date, birthday, loan_date, loan_money, is_insure, station, remark, image from agro_livestock
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, code, iccid, xq_Iccid, livestock_type, livestock_varieties, out_date, birthday, loan_date, loan_money, is_insure, station, remark, image ,user_id,dept_id from agro_livestock t
     </sql>
 
     <select id="selectAgroLivestockList" parameterType="AgroLivestock" resultMap="AgroLivestockResult">
@@ -44,7 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="birthday != null "> and birthday = #{birthday}</if>
             <if test="isInsure != null  and isInsure != ''"> and is_insure = #{isInsure}</if>
             <if test="station != null  and station != ''"> and station = #{station}</if>
-        </where>
+            ${params.dataScope}
+     </where>
     </select>
     
     <select id="selectAgroLivestockById" parameterType="String" resultMap="AgroLivestockResult">
@@ -75,6 +78,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null">station,</if>
             <if test="remark != null">remark,</if>
             <if test="image != null">image,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -97,6 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null">#{station},</if>
             <if test="remark != null">#{remark},</if>
             <if test="image != null">#{image},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 

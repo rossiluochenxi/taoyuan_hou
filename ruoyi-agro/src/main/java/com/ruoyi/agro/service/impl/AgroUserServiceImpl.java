@@ -3,6 +3,7 @@ package com.ruoyi.agro.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import com.ruoyi.agro.service.IAgroUserService;
  * @date 2024-03-13
  */
 @Service
-public class AgroUserServiceImpl implements IAgroUserService 
+public class AgroUserServiceImpl implements IAgroUserService
 {
     @Autowired
     private AgroUserMapper agroUserMapper;
@@ -42,6 +43,7 @@ public class AgroUserServiceImpl implements IAgroUserService
      * @return 养殖户管理
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<AgroUser> selectAgroUserList(AgroUser agroUser)
     {
         return agroUserMapper.selectAgroUserList(agroUser);

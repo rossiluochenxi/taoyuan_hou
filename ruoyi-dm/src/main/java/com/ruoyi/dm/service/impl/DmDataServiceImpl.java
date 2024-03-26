@@ -6,7 +6,10 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ruoyi.agro.domain.AgroLivestock;
+import com.ruoyi.agro.service.impl.AgroLivestockServiceImpl;
 import com.ruoyi.common.Business.BusinessService;
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -29,6 +32,8 @@ public class DmDataServiceImpl implements IDmDataService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DmDataServiceImpl.class);
     @Autowired
     private DmDataMapper dmDataMapper;
+    @Autowired
+    private AgroLivestockServiceImpl agroLivestockServiceImpl;
 
     /**
      * 查询全部数据
@@ -48,6 +53,7 @@ public class DmDataServiceImpl implements IDmDataService {
      * @return 全部数据
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<DmData> selectDmDataList(DmData dmData) {
         return dmDataMapper.selectDmDataList(dmData);
     }
@@ -61,6 +67,8 @@ public class DmDataServiceImpl implements IDmDataService {
     @Override
     public int insertDmData(DmData dmData) {
         dmData.setCreateTime(DateUtils.getNowDate());
+        dmData.setId(IdUtils.randomUUID());
+
         return dmDataMapper.insertDmData(dmData);
     }
 
@@ -131,7 +139,19 @@ public class DmDataServiceImpl implements IDmDataService {
         dmData.setPci(jsonNode.get("pci").asText());
         dmData.setCreateTime(DateUtils.parseDate(DateUtils.getTime()));
         dmData.setId(IdUtils.randomUUID());
-        dmDataMapper.insertDmData(dmData);
+        AgroLivestock agroLivestock = agroLivestockServiceImpl.selectAgroLivestockByIccid(dmData.getAgroLivestockIccid());
+        if (agroLivestock == null) {
+            dmDataMapper.insertDmData(dmData);
+        } else {
+            dmData.setAgroUserId(agroLivestock.getAgroUserId());
+            dmData.setAgroUserName(agroLivestock.getAgroUserName());
+            dmData.setAgroLivestockId(agroLivestock.getId());
+            dmData.setAgroLivestockCode(agroLivestock.getCode());
+            dmData.setAgroLivestockXqiccid(agroLivestock.getXqIccid());
+            dmData.setUserId(agroLivestock.getUserId());
+            dmData.setDeptId(agroLivestock.getDeptId());
+            dmDataMapper.insertDmData(dmData);
+        }
         return null;
     }
 }
