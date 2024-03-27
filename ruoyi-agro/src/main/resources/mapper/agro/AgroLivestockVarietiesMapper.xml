@@ -10,17 +10,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="livestockVarieties"    column="livestock_varieties"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectAgroLivestockVarietiesVo">
-        select id, create_by, create_time, update_by, livestock_varieties from agro_livestock_varieties
+        select id, create_by, create_time, update_by, livestock_varieties  ,user_id,dept_id from agro_livestock_varieties t
     </sql>
 
     <select id="selectAgroLivestockVarietiesList" parameterType="AgroLivestockVarieties" resultMap="AgroLivestockVarietiesResult">
         <include refid="selectAgroLivestockVarietiesVo"/>
         <where>  
             <if test="livestockVarieties != null  and livestockVarieties != ''"> and livestock_varieties = #{livestockVarieties}</if>
-        </where>
+         ${params.dataScope}
+       </where>
     </select>
     
     <select id="selectAgroLivestockVarietiesById" parameterType="String" resultMap="AgroLivestockVarietiesResult">
@@ -36,6 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="livestockVarieties != null">livestock_varieties,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -43,6 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="livestockVarieties != null">#{livestockVarieties},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 

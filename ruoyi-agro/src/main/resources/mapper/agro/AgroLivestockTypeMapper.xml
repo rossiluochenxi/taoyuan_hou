@@ -10,17 +10,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="livestockType"    column="livestock_type"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectAgroLivestockTypeVo">
-        select id, create_by, create_time, update_by, livestock_type from agro_livestock_type
+        select id, create_by, create_time, update_by, livestock_type ,user_id,dept_id from agro_livestock_type t
     </sql>
 
     <select id="selectAgroLivestockTypeList" parameterType="AgroLivestockType" resultMap="AgroLivestockTypeResult">
         <include refid="selectAgroLivestockTypeVo"/>
         <where>  
             <if test="livestockType != null  and livestockType != ''"> and livestock_type = #{livestockType}</if>
-        </where>
+            ${params.dataScope}
+       </where>
     </select>
     
     <select id="selectAgroLivestockTypeById" parameterType="String" resultMap="AgroLivestockTypeResult">
@@ -36,6 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="livestockType != null">livestock_type,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -43,6 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="livestockType != null">#{livestockType},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 

@@ -77,6 +77,8 @@ public class AgroLivestockVarietiesController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody AgroLivestockVarieties agroLivestockVarieties)
     {       agroLivestockVarieties.setCreateBy(getUsername());
+        agroLivestockVarieties.setUserId(getUserId().toString());
+        agroLivestockVarieties.setDeptId(getDeptId().toString());
         return toAjax(agroLivestockVarietiesService.insertAgroLivestockVarieties(agroLivestockVarieties));
     }
 

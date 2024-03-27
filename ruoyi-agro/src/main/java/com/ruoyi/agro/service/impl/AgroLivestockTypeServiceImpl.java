@@ -1,6 +1,8 @@
 package com.ruoyi.agro.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,7 @@ public class AgroLivestockTypeServiceImpl implements IAgroLivestockTypeService
      * @return 牲畜类型管理
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<AgroLivestockType> selectAgroLivestockTypeList(AgroLivestockType agroLivestockType)
     {
         return agroLivestockTypeMapper.selectAgroLivestockTypeList(agroLivestockType);

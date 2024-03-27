@@ -3,10 +3,7 @@ package com.ruoyi.common.utils.mqtt;
 import com.alibaba.fastjson2.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ruoyi.common.Business.BusinessService;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +27,45 @@ public class PushCallback implements MqttCallback {
     private static String _msg;
 
     @Autowired
-   private ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor;
-
-    @Override
-    public void connectionLost(Throwable throwable) {
-        // 连接丢失后，一般在这里面进行重连
-        logger.info("连接断开，可以做重连");
-        if (client == null || !client.isConnected()) {
-            mqttConfig.getMqttPushClient();
+    private ThreadPoolTaskExecutor mqttMessageThreadPoolTaskExecutor;
+//    private int reconnectCount = 0;
+//    private static final int MAX_RECONNECT_COUNT = 3;
+//    private static final long RECONNECT_INTERVAL = 2 * 60 * 1000; // 2分钟的毫秒数
+//
+//    @Override
+//    public void connectionLost(Throwable throwable) {
+//        if (reconnectCount < MAX_RECONNECT_COUNT) {
+//            logger.info("连接断开，尝试重连，重连次数：" + (reconnectCount + 1));
+//            if (client != null && !client.isConnected()) {
+//                try {
+//                    mqttPushClient.connect(mqttConfig.getHostUrl(), mqttConfig.getClientId(), mqttConfig.getUsername(), mqttConfig.getPassword(), mqttConfig.getTimeout(), mqttConfig.getKeepalive());
+//                    // 重连成功，重置重连次数
+//                    reconnectCount = 0;
+//                } catch (Exception e) {
+//                    logger.error("重连失败：" + e.getMessage());
+//                    reconnectCount++;
+//                    try {
+//                        // 等待2分钟后进行下一次重连尝试
+//                        Thread.sleep(RECONNECT_INTERVAL);
+//                    } catch (InterruptedException ex) {
+//                        Thread.currentThread().interrupt();
+//                    }
+//                }
+//            }
+//        } else {
+//            logger.error("达到最大重连次数，停止重连");
+//        }
+//    }
+        @Override
+        public void connectionLost(Throwable throwable) {
+            // 连接丢失后，一般在这里面进行重连
+            logger.info("连接断开，可以做重连");
+            if (client == null || !client.isConnected()) {
+                mqttConfig.getMqttPushClient();
+            }
         }
-    }
+
+
 
     @Autowired
     private BusinessService businessService;
