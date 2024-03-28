@@ -273,8 +273,17 @@ public class SysUserServiceImpl implements ISysUserService
      */
     @Override
     public boolean registerUser(SysUser user)
-    {
-        return userMapper.insertUser(user) > 0;
+    {        //设置注册用户部门
+        user.setDeptId(202L);
+        user.setCreateBy("register");
+        boolean flag=userMapper.insertUser(user) > 0;
+        //设置注册用户岗位
+        user.setPostIds(new Long[]{6L});
+        //新增岗位
+        this.insertUserPost(user);
+        //新增角色信息103 是农户
+        this.insertUserRole(userMapper.selectUserByUserName(user.getUserName()).getUserId(),new Long[]{103L});
+        return  flag;
     }
 
     /**
