@@ -80,6 +80,8 @@ public class AgroLivestockController extends BaseController
         agroLivestock.setCreateBy(getUsername());
         agroLivestock.setUserId(getUserId().toString());
         agroLivestock.setDeptId(getDeptId().toString());
+//        System.out.println("用户信息1"+getLoginUser().getUser().toString());
+
         return toAjax(agroLivestockService.insertAgroLivestock(agroLivestock));
     }
 

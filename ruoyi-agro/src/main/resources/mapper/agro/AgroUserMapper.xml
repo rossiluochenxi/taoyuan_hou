@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="manager"    column="manager"    />
         <result property="areaId"    column="area_id"    />
         <result property="cityId"    column="city_id"    />
+        <result property="streetId"    column="street_id"    />
         <result property="provinceId"    column="province_id"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -32,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectAgroUserVo">
-        select id, `name`, meterinformation, phone, `identity`, `state`, remark, guid, area_name, lon, lat, sys_user_id, sys_user_name, station, manager, area_id, city_id, province_id, create_by, create_time, update_by, update_time  ,user_id,dept_id from agro_user t
+        select id, `name`, meterinformation, phone, `identity`, `state`, remark, guid, area_name, lon, lat, sys_user_id, sys_user_name, station, manager, area_id, city_id, province_id,street_id,create_by, create_time, update_by, update_time  ,user_id,dept_id from agro_user t
     </sql>
 
     <select id="selectAgroUserList" parameterType="AgroUser" resultMap="AgroUserResult">
@@ -74,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="manager != null">manager,</if>
             <if test="areaId != null">area_id,</if>
             <if test="cityId != null">city_id,</if>
+            <if test="streetId != null">street_id,</if>
             <if test="provinceId != null">province_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -100,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="manager != null">#{manager},</if>
             <if test="areaId != null">#{areaId},</if>
             <if test="cityId != null">#{cityId},</if>
+            <if test="streetId != null">#{streetId},</if>
             <if test="provinceId != null">#{provinceId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -129,6 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="manager != null">manager = #{manager},</if>
             <if test="areaId != null">area_id = #{areaId},</if>
             <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="streetId != null">street_id = #{cityId},</if>
             <if test="provinceId != null">province_id = #{provinceId},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

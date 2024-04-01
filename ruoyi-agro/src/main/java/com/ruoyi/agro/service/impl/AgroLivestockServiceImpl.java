@@ -59,6 +59,7 @@ public class AgroLivestockServiceImpl implements IAgroLivestockService
     {
         agroLivestock.setCreateTime(DateUtils.getNowDate());
         agroLivestock.setId(IdUtils.randomUUID());
+        
         return agroLivestockMapper.insertAgroLivestock(agroLivestock);
     }
 

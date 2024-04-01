@@ -73,6 +73,17 @@ public class AgroUser extends BaseEntity
     /** 省份 */
     private String provinceId;
 
+    public String getStreetId() {
+        return streetId;
+    }
+
+    public void setStreetId(String streetId) {
+        this.streetId = streetId;
+    }
+
+    /** 街道 */
+    private String streetId;
+
 
     /** 用户id */
 //    @Excel(name = "user_id")
