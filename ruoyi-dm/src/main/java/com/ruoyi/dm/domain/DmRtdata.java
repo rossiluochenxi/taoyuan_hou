@@ -99,13 +99,52 @@ public class DmRtdata extends BaseEntity
     private Date date;
 
     /** 用户id */
-//    @Excel(name = "user_id")
     private String userId;
 
 
     /** 部门id */
-//    @Excel(name = "dept_id")
     private String deptId;
+
+
+    /** 电话 */
+    private String phone;
+    /** 品种 */
+    private String agroLivestockVarieties;
+
+    public String getAgroLivestockVarieties() {
+        return agroLivestockVarieties;
+    }
+
+    public void setAgroLivestockVarieties(String agroLivestockVarieties) {
+        this.agroLivestockVarieties = agroLivestockVarieties;
+    }
+
+    public String getAgroLivestockType() {
+        return agroLivestockType;
+    }
+
+    public void setAgroLivestockType(String agroLivestockType) {
+        this.agroLivestockType = agroLivestockType;
+    }
+
+    /** 类型 */
+    private String agroLivestockType;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
+
+
+
+
+
+
 
 
     public String getUserId() {

@@ -32,14 +32,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="date"    column="date"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
+
+
+        <result property="phone"    column="phone"    />
+        <result property="agroLivestockVarieties"    column="livestock_varieties"    />
+        <result property="agroLivestockType"    column="livestock_type"    />
     </resultMap>
 
     <sql id="selectDmRtdataVo">
         select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_rtdata t
     </sql>
 
+
+
+    <sql id="selectDmRtdataVoLeft">
+        SELECT
+            t.id,
+            t.create_by,
+            t.create_time,
+            t.update_by,
+            t.update_time,
+            t.agro_user_id,
+            t.agro_user_name,
+            t.agro_livestock_id,
+            t.agro_livestock_code,
+            t.agro_livestock_iccid,
+            t.agro_livestock_xqiccid,
+            t.imei,
+            t.device_id,
+            t.temperature,
+            t.step,
+            t.weight,
+            t.livestock_lon,
+            t.livestock_lat,
+            t.rsrq,
+            t.ecl,
+            t.cellid,
+            t.snr,
+            t.rsrp,
+            t.pci,
+            t.`date`,
+            t.user_id,
+            t.dept_id,
+            u.phone,
+            l.livestock_type,
+            l.livestock_varieties
+
+        FROM
+            dm_rtdata t LEFT JOIN agro_user as u on t.agro_user_id = u.id LEFT JOIN agro_livestock as l on t.agro_livestock_id=l.id
+    </sql>
+
+
     <select id="selectDmRtdataList" parameterType="DmRtdata" resultMap="DmRtdataResult">
-        <include refid="selectDmRtdataVo"/>
+        <include refid="selectDmRtdataVoLeft"/>
         <where>  
             <if test="agroLivestockCode != null  and agroLivestockCode != ''"> and agro_livestock_code = #{agroLivestockCode}</if>
             <if test="agroLivestockIccid != null  and agroLivestockIccid != ''"> and agro_livestock_iccid = #{agroLivestockIccid}</if>
