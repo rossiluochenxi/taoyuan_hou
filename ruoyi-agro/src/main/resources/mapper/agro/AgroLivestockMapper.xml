@@ -27,10 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="image"    column="image"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="deviceType"    column="device_type"    />
+        <result property="elLon"    column="el_lon"    />
+        <result property="elLab"    column="el_lab"    />
     </resultMap>
 
     <sql id="selectAgroLivestockVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, code, iccid, xq_Iccid, livestock_type, livestock_varieties, out_date, birthday, loan_date, loan_money, is_insure, station, remark, image ,user_id,dept_id from agro_livestock t
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, code, iccid, device_type,xq_Iccid, livestock_type, livestock_varieties,el_lon,el_lab, out_date, birthday, loan_date, loan_money, is_insure, station, remark, image ,user_id,dept_id from agro_livestock t
     </sql>
 
     <select id="selectAgroLivestockList" parameterType="AgroLivestock" resultMap="AgroLivestockResult">
@@ -39,6 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroUserName != null  and agroUserName != ''"> and agro_user_name like concat('%', #{agroUserName}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="iccid != null  and iccid != ''"> and iccid = #{iccid}</if>
+            <if test="deviceType != null  and deviceType != ''"> and device_Type = #{deviceType}</if>
+            <if test="elLon != null  and elLon != ''"> and el_lon = #{elLon}</if>
+            <if test="elLab != null  and elLab != ''"> and el_lab = #{elLab}</if>
             <if test="xqIccid != null  and xqIccid != ''"> and xq_Iccid = #{xqIccid}</if>
             <if test="livestockType != null  and livestockType != ''"> and livestock_type = #{livestockType}</if>
             <if test="livestockVarieties != null  and livestockVarieties != ''"> and livestock_varieties = #{livestockVarieties}</if>
@@ -70,6 +76,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="xqIccid != null">xq_Iccid,</if>
             <if test="livestockType != null and livestockType != ''">livestock_type,</if>
             <if test="livestockVarieties != null and livestockVarieties != ''">livestock_varieties,</if>
+            <if test="deviceType != null and deviceType != ''">device_Type,</if>
+            <if test="elLon != null and elLon != ''">el_lon,</if>
+            <if test="elLab != null and elLab != ''">el_lab,</if>
             <if test="outDate != null">out_date,</if>
             <if test="birthday != null">birthday,</if>
             <if test="loanDate != null">loan_date,</if>
@@ -94,6 +103,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="xqIccid != null">#{xqIccid},</if>
             <if test="livestockType != null and livestockType != ''">#{livestockType},</if>
             <if test="livestockVarieties != null and livestockVarieties != ''">#{livestockVarieties},</if>
+            <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
+            <if test="elLon != null and elLon != ''">#{elLon},</if>
+            <if test="elLab != null and elLab != ''">#{elLab},</if>
             <if test="outDate != null">#{outDate},</if>
             <if test="birthday != null">#{birthday},</if>
             <if test="loanDate != null">#{loanDate},</if>
@@ -121,6 +133,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="xqIccid != null">xq_Iccid = #{xqIccid},</if>
             <if test="livestockType != null and livestockType != ''">livestock_type = #{livestockType},</if>
             <if test="livestockVarieties != null and livestockVarieties != ''">livestock_varieties = #{livestockVarieties},</if>
+            <if test="deviceType != null and deviceType != ''">device_type = #{deviceType},</if>
+            <if test="elLon != null and elLon != ''">el_lon = #{elLon},</if>
+            <if test="elLab != null and elLab != ''">el_lab = #{elLab},</if>
             <if test="outDate != null">out_date = #{outDate},</if>
             <if test="birthday != null">birthday = #{birthday},</if>
             <if test="loanDate != null">loan_date = #{loanDate},</if>

@@ -86,6 +86,44 @@ public class AgroLivestock extends BaseEntity
 //    @Excel(name = "dept_id")
     private String deptId;
 
+    /** 设备类型 */
+//    @Excel(name = "device_type")
+    private String deviceType;
+
+
+    /** 耳标经度 */
+//    @Excel(name = "el_lon")
+    private String elLon;
+
+    /** 耳标纬度 */
+//    @Excel(name = "el_lab")
+    private String elLab;
+
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getElLon() {
+        return elLon;
+    }
+
+    public void setElLon(String elLon) {
+        this.elLon = elLon;
+    }
+
+    public String getElLab() {
+        return elLab;
+    }
+
+    public void setElLab(String elLab) {
+        this.elLab = elLab;
+    }
+
 
     public String getUserId() {
         return userId;
