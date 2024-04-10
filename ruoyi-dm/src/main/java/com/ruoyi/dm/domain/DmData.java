@@ -94,9 +94,10 @@ public class DmData extends BaseEntity
     private String pci;
 
     /** 上传时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date date;
+
 
 
 
@@ -109,6 +110,35 @@ public class DmData extends BaseEntity
     /** 部门id */
 //    @Excel(name = "dept_id")
     private String deptId;
+
+
+
+    /** 电量 */
+    @Excel(name = "电量")
+    private BigDecimal drycell;
+
+
+    /** 设备类型 */
+
+    private String deviceType;
+
+
+    public BigDecimal getDrycell() {
+        return drycell;
+    }
+
+    public void setDrycell(BigDecimal drycell) {
+        this.drycell = drycell;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
 
 
     public String getUserId() {

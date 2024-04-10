@@ -60,6 +60,8 @@ public class PushCallback implements MqttCallback {
         public void connectionLost(Throwable throwable) {
             // 连接丢失后，一般在这里面进行重连
             logger.info("连接断开，可以做重连");
+            throwable.printStackTrace();
+
             if (client == null || !client.isConnected()) {
                 mqttConfig.getMqttPushClient();
             }

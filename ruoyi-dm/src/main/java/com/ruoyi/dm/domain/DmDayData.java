@@ -108,6 +108,35 @@ public class DmDayData extends BaseEntity
     private String deptId;
 
 
+
+    /** 电量 */
+    @Excel(name = "电量")
+    private BigDecimal drycell;
+
+    /** 设备类型 */
+
+    private String deviceType;
+
+
+    public BigDecimal getDrycell() {
+        return drycell;
+    }
+
+    public void setDrycell(BigDecimal drycell) {
+        this.drycell = drycell;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+
+
+
     public String getUserId() {
         return userId;
     }

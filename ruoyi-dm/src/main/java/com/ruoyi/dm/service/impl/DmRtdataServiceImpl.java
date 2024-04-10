@@ -122,6 +122,9 @@ public class DmRtdataServiceImpl implements IDmRtdataService {
         dmRtdata.setAgroLivestockXqiccid(jsonNode.get("agroLivestockXqiccid").asText());
         dmRtdata.setImei(jsonNode.get("imei").asText());
         dmRtdata.setDeviceId(jsonNode.get("deviceId").asText());
+        dmRtdata.setDeviceType(jsonNode.get("deviceType").asText());
+        BigDecimal drycell = new BigDecimal(jsonNode.get("drycell").asText());
+        dmRtdata.setDrycell(drycell);
         BigDecimal temperature = new BigDecimal(jsonNode.get("temperature").asText());
         dmRtdata.setTemperature(temperature);
         dmRtdata.setStep(jsonNode.get("step").asText());

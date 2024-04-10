@@ -106,10 +106,29 @@ public class DmRtdata extends BaseEntity
     private String deptId;
 
 
+
+    /** 电量 */
+
+
+    @Excel(name = "电量")
+    private BigDecimal drycell;
+
+
+    /** 设备类型 */
+
+    private String deviceType;
+
+
     /** 电话 */
     private String phone;
     /** 品种 */
     private String agroLivestockVarieties;
+
+    /** 类型 */
+    private String agroLivestockType;
+
+
+
 
     public String getAgroLivestockVarieties() {
         return agroLivestockVarieties;
@@ -127,8 +146,7 @@ public class DmRtdata extends BaseEntity
         this.agroLivestockType = agroLivestockType;
     }
 
-    /** 类型 */
-    private String agroLivestockType;
+
 
     public String getPhone() {
         return phone;
@@ -141,7 +159,21 @@ public class DmRtdata extends BaseEntity
 
 
 
+    public BigDecimal getDrycell() {
+        return drycell;
+    }
 
+    public void setDrycell(BigDecimal drycell) {
+        this.drycell = drycell;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
 
 
 

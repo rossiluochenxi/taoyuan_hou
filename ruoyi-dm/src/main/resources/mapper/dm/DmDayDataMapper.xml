@@ -16,8 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="agroLivestockCode"    column="agro_livestock_code"    />
         <result property="agroLivestockIccid"    column="agro_livestock_iccid"    />
         <result property="agroLivestockXqiccid"    column="agro_livestock_xqiccid"    />
+        <result property="deviceType"    column="device_type"    />
         <result property="imei"    column="imei"    />
         <result property="deviceId"    column="device_id"    />
+        <result property="drycell"    column="drycell"    />
         <result property="temperature"    column="temperature"    />
         <result property="step"    column="step"    />
         <result property="weight"    column="weight"    />
@@ -35,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDmDayDataVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_day_data t
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid,device_type,drycell,imei,device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_day_data t
     </sql>
 
     <select id="selectDmDayDataList" parameterType="DmDayData" resultMap="DmDayDataResult">
@@ -47,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null  and agroLivestockCode != ''"> and agro_livestock_code = #{agroLivestockCode}</if>
             <if test="agroLivestockIccid != null  and agroLivestockIccid != ''"> and agro_livestock_iccid = #{agroLivestockIccid}</if>
             <if test="agroLivestockXqiccid != null  and agroLivestockXqiccid != ''"> and agro_livestock_xqiccid = #{agroLivestockXqiccid}</if>
+            <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
             <if test="imei != null  and imei != ''"> and imei = #{imei}</if>
             <if test="deviceId != null  and deviceId != ''"> and device_id = #{deviceId}</if>
             <if test="temperature != null "> and temperature = #{temperature}</if>
@@ -90,8 +93,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">agro_livestock_code,</if>
             <if test="agroLivestockIccid != null">agro_livestock_iccid,</if>
             <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid,</if>
+            <if test="deviceType != null">device_type,</if>
             <if test="imei != null">imei,</if>
             <if test="deviceId != null">device_id,</if>
+            <if test="drycell != null">drycell,</if>
             <if test="temperature != null">temperature,</if>
             <if test="step != null">step,</if>
             <if test="weight != null">weight,</if>
@@ -119,8 +124,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">#{agroLivestockCode},</if>
             <if test="agroLivestockIccid != null">#{agroLivestockIccid},</if>
             <if test="agroLivestockXqiccid != null">#{agroLivestockXqiccid},</if>
+            <if test="deviceType != null">#{deviceType},</if>
             <if test="imei != null">#{imei},</if>
             <if test="deviceId != null">#{deviceId},</if>
+            <if test="drycell != null">#{drycell},</if>
             <if test="temperature != null">#{temperature},</if>
             <if test="step != null">#{step},</if>
             <if test="weight != null">#{weight},</if>
@@ -151,6 +158,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">agro_livestock_code = #{agroLivestockCode},</if>
             <if test="agroLivestockIccid != null">agro_livestock_iccid = #{agroLivestockIccid},</if>
             <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid = #{agroLivestockXqiccid},</if>
+            <if test="deviceType != null">device_type = #{deviceType},</if>
+            <if test="drycell != null">drycell = #{drycell},</if>
             <if test="imei != null">imei = #{imei},</if>
             <if test="deviceId != null">device_id = #{deviceId},</if>
             <if test="temperature != null">temperature = #{temperature},</if>
@@ -181,9 +190,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <insert id="insertOrUpdateDmDayData" parameterType="DmDayData">
-        INSERT INTO dm_day_data (id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`,user_id,dept_id)
-        VALUES (#{id}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{agroUserId}, #{agroUserName}, #{agroLivestockId}, #{agroLivestockCode}, #{agroLivestockIccid}, #{agroLivestockXqiccid}, #{imei}, #{deviceId}, #{temperature}, #{step}, #{weight}, #{livestockLon}, #{livestockLat}, #{rsrq}, #{ecl}, #{cellid}, #{snr}, #{rsrp}, #{pci}, #{date},#{userId}, #{deptId})
+        INSERT INTO dm_day_data (id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, device_type,imei, device_id, drycell,temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`,user_id,dept_id)
+        VALUES (#{id}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{agroUserId}, #{agroUserName}, #{agroLivestockId}, #{agroLivestockCode}, #{agroLivestockIccid}, #{agroLivestockXqiccid}, #{deviceType},#{imei}, #{deviceId},#{drycell}, #{temperature}, #{step}, #{weight}, #{livestockLon}, #{livestockLat}, #{rsrq}, #{ecl}, #{cellid}, #{snr}, #{rsrp}, #{pci}, #{date},#{userId}, #{deptId})
             ON DUPLICATE KEY UPDATE
-             id=VALUES(id), create_by=VALUES(create_by), create_time=VALUES(create_time), update_by=VALUES(update_by), update_time=VALUES(update_time), agro_user_id=VALUES(agro_user_id), agro_user_name=VALUES(agro_user_name), agro_livestock_id=VALUES(agro_livestock_id), agro_livestock_code=VALUES(agro_livestock_code), agro_livestock_iccid=VALUES(agro_livestock_iccid), agro_livestock_xqiccid=VALUES(agro_livestock_xqiccid), imei=VALUES(imei), device_id=VALUES(device_id), temperature=VALUES(temperature), step=VALUES(step), weight=VALUES(weight), livestock_lon=VALUES(livestock_lon), livestock_lat=VALUES(livestock_lat), rsrq=VALUES(rsrq), ecl=VALUES(ecl), cellid=VALUES(cellid), snr=VALUES(snr), rsrp=VALUES(rsrp), pci=VALUES(pci), date=VALUES(`date`), user_id=VALUES(user_id), dept_id=VALUES(dept_id)
+             id=VALUES(id), create_by=VALUES(create_by), create_time=VALUES(create_time), update_by=VALUES(update_by), update_time=VALUES(update_time), agro_user_id=VALUES(agro_user_id), agro_user_name=VALUES(agro_user_name), agro_livestock_id=VALUES(agro_livestock_id), agro_livestock_code=VALUES(agro_livestock_code), agro_livestock_iccid=VALUES(agro_livestock_iccid), agro_livestock_xqiccid=VALUES(agro_livestock_xqiccid), device_type=VALUES(device_type),imei=VALUES(imei), device_id=VALUES(device_id), drycell=VALUES(drycell),temperature=VALUES(temperature), step=VALUES(step), weight=VALUES(weight), livestock_lon=VALUES(livestock_lon), livestock_lat=VALUES(livestock_lat), rsrq=VALUES(rsrq), ecl=VALUES(ecl), cellid=VALUES(cellid), snr=VALUES(snr), rsrp=VALUES(rsrp), pci=VALUES(pci), date=VALUES(`date`), user_id=VALUES(user_id), dept_id=VALUES(dept_id)
     </insert>
 </mapper>

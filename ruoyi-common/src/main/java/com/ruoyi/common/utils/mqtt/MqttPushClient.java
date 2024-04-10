@@ -105,6 +105,7 @@ public class MqttPushClient {
             MqttPushClient.getClient().subscribe(topic, qos);
         } catch (MqttException e) {
             e.printStackTrace();
+
         }
     }
 

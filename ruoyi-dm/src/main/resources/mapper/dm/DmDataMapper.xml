@@ -16,10 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="agroLivestockCode"    column="agro_livestock_code"    />
         <result property="agroLivestockIccid"    column="agro_livestock_iccid"    />
         <result property="agroLivestockXqiccid"    column="agro_livestock_xqiccid"    />
+        <result property="deviceType"    column="device_type"    />
+
         <result property="imei"    column="imei"    />
         <result property="deviceId"    column="device_id"    />
+        <result property="drycell"    column="drycell"    />
         <result property="temperature"    column="temperature"    />
         <result property="step"    column="step"    />
+
         <result property="weight"    column="weight"    />
         <result property="livestockLon"    column="livestock_lon"    />
         <result property="livestockLat"    column="livestock_lat"    />
@@ -35,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDmDataVo">
-        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_data t
+        select id, create_by, create_time, update_by, update_time, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid,device_type,drycell, imei, device_id, temperature, step, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, `date`  ,user_id,dept_id from dm_data t
     </sql>
 
     <select id="selectDmDataList" parameterType="DmData" resultMap="DmDataResult">
@@ -46,6 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null  and agroLivestockCode != ''"> and agro_livestock_code = #{agroLivestockCode}</if>
             <if test="agroLivestockIccid != null  and agroLivestockIccid != ''"> and agro_livestock_iccid = #{agroLivestockIccid}</if>
             <if test="agroLivestockXqiccid != null  and agroLivestockXqiccid != ''"> and agro_livestock_xqiccid = #{agroLivestockXqiccid}</if>
+            <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
+
             <if test="temperature != null "> and temperature = #{temperature}</if>
             <if test="step != null  and step != ''"> and step = #{step}</if>
             <if test="weight != null "> and weight = #{weight}</if>
@@ -81,8 +87,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">agro_livestock_code,</if>
             <if test="agroLivestockIccid != null">agro_livestock_iccid,</if>
             <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid,</if>
+            <if test="deviceType != null">device_type,</if>
             <if test="imei != null">imei,</if>
             <if test="deviceId != null">device_id,</if>
+            <if test="drycell != null">drycell,</if>
             <if test="temperature != null">temperature,</if>
             <if test="step != null">step,</if>
             <if test="weight != null">weight,</if>
@@ -112,8 +120,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">#{agroLivestockCode},</if>
             <if test="agroLivestockIccid != null">#{agroLivestockIccid},</if>
             <if test="agroLivestockXqiccid != null">#{agroLivestockXqiccid},</if>
+            <if test="deviceType != null">#{deviceType},</if>
             <if test="imei != null">#{imei},</if>
             <if test="deviceId != null">#{deviceId},</if>
+            <if test="drycell != null">#{drycell},</if>
             <if test="temperature != null">#{temperature},</if>
             <if test="step != null">#{step},</if>
             <if test="weight != null">#{weight},</if>
@@ -146,6 +156,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agroLivestockCode != null">agro_livestock_code = #{agroLivestockCode},</if>
             <if test="agroLivestockIccid != null">agro_livestock_iccid = #{agroLivestockIccid},</if>
             <if test="agroLivestockXqiccid != null">agro_livestock_xqiccid = #{agroLivestockXqiccid},</if>
+            <if test="deviceType != null">device_type = #{deviceType},</if>
+            <if test="drycell != null">drycell = #{drycell},</if>
             <if test="imei != null">imei = #{imei},</if>
             <if test="deviceId != null">device_id = #{deviceId},</if>
             <if test="temperature != null">temperature = #{temperature},</if>

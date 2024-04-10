@@ -117,6 +117,9 @@ public class DmDayDataServiceImpl implements IDmDayDataService {
 //        dmDayData.setAgroLivestockCode(jsonNode.get("agroLivestockCode").asText());
         dmDayData.setAgroLivestockIccid(jsonNode.get("agroLivestockIccid").asText());
         dmDayData.setAgroLivestockXqiccid(jsonNode.get("agroLivestockXqiccid").asText());
+        dmDayData.setDeviceType(jsonNode.get("deviceType").asText());
+        BigDecimal drycell = new BigDecimal(jsonNode.get("drycell").asText());
+        dmDayData.setDrycell(drycell);
         dmDayData.setImei(jsonNode.get("imei").asText());
         dmDayData.setDeviceId(jsonNode.get("deviceId").asText());
         BigDecimal temperature = new BigDecimal(jsonNode.get("temperature").asText());
