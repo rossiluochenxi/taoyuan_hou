@@ -100,6 +100,32 @@ public class AgroLivestock extends BaseEntity
     private String elLab;
 
 
+    public String getLivestockTypeId() {
+        return livestockTypeId;
+    }
+
+    public void setLivestockTypeId(String livestockTypeId) {
+        this.livestockTypeId = livestockTypeId;
+    }
+
+    public String getLivestockVarietiesId() {
+        return livestockVarietiesId;
+    }
+
+    public void setLivestockVarietiesId(String livestockVarietiesId) {
+        this.livestockVarietiesId = livestockVarietiesId;
+    }
+
+    /** 牲畜类型id */
+//    @Excel(name = "livestock_type_id")
+    private String livestockTypeId;
+
+    /** 牲畜品种id */
+//    @Excel(name = "livestock_varieties_id")
+    private String livestockVarietiesId;
+
+
+
     public String getDeviceType() {
         return deviceType;
     }

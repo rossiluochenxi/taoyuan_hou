@@ -53,8 +53,8 @@ spring:
     username: admin # 用户名
     password: admin # 密码
     hostUrl: tcp://81.70.187.145:1883 # tcp://ip:端口
-    clientId: iotTestId3 # 客户端id
-    defaultTopic: iotTest3,iotTest13 # 订阅主题
+    clientId: iotTestId4 # 客户端id
+    defaultTopic: iotTest4,iotTest14 # 订阅主题
     timeout: 100 # 超时时间 （单位：秒）
     keepalive: 60 # 心跳 （单位：秒）
     enabled: true # 是否使用mqtt功能

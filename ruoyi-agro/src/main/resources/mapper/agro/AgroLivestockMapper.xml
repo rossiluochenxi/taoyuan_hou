@@ -30,6 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="deviceType"    column="device_type"    />
         <result property="elLon"    column="el_lon"    />
         <result property="elLab"    column="el_lab"    />
+        <result property="livestockTypeId"    column="livestock_type_id"    />
+        <result property="livestockVarietiesId"    column="livestock_varieties_id"    />
+
     </resultMap>
 
     <sql id="selectAgroLivestockVo">
@@ -87,6 +90,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null">station,</if>
             <if test="remark != null">remark,</if>
             <if test="image != null">image,</if>
+            <if test="livestockTypeId != null">livestock_type_id,</if>
+            <if test="livestockVarietiesId != null">livestock_varieties_id,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
          </trim>
@@ -114,6 +119,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null">#{station},</if>
             <if test="remark != null">#{remark},</if>
             <if test="image != null">#{image},</if>
+            <if test="livestockTypeId != null">#{livestockTypeId},</if>
+            <if test="livestockVarietiesId != null">#{livestockVarietiesId},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
          </trim>
@@ -144,6 +151,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null">station = #{station},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="image != null">image = #{image},</if>
+
+            <if test="livestockTypeId != null and livestockTypeId != ''">livestock_type_id = #{livestockTypeId},</if>
+            <if test="livestockVarietiesId != null and livestockVarietiesId != ''">livestock_varieties_id = #{livestockVarietiesId},</if>
+
         </trim>
         where id = #{id}
     </update>
