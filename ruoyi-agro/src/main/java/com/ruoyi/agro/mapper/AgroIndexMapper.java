@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface AgroIndexMapper {
 
-    public List<AgroIndexVar> selectIndexVarList();
+    public List<AgroIndexVar> selectIndexVarList(AgroIndexVar agroIndexVar);
 
 }

@@ -19,7 +19,7 @@ public class AgroIndexServiceImpl implements IAgroIndexService {
     @Override
     @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<AgroIndexVar> selectIndexVarList(AgroIndexVar agroIndexVar) {
-      return agroIndexMapper.selectIndexVarList();
+      return agroIndexMapper.selectIndexVarList(agroIndexVar);
     }
 
 }

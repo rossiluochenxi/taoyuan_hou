@@ -24,11 +24,11 @@ public class AgroIndexController extends BaseController {
     /**
      * 查询牲畜档案管理列表
      */
-    @PreAuthorize("@ss.hasPermi('agro:index:list')")
+//    @PreAuthorize("@ss.hasPermi('agro:index:list')")
     @GetMapping("/list")
     public TableDataInfo list(AgroIndexVar agroIndexVar) {
-        agroIndexVar.setUserId(getUserId().toString());
-        agroIndexVar.setDeptId(getDeptId().toString());
+//        agroIndexVar.setUserId(getUserId().toString());
+//        agroIndexVar.setDeptId(getDeptId().toString());
      List<AgroIndexVar> list = agroIndexService.selectIndexVarList(agroIndexVar);
 
      return getDataTable(list);

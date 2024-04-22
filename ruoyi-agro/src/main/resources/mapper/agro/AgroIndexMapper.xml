@@ -13,12 +13,12 @@
 
 
     <select id="selectIndexVarList"   parameterType="AgroIndexVar" resultMap="AgroIndexVarResult">
-        SELECT COUNT(*) as varieties_num, v.livestock_varieties
+        SELECT t.dept_id, t.user_id, COUNT(*) as varieties_num, v.livestock_varieties
         FROM agro_livestock as t
-        INNER JOIN agro_livestock_varieties as v ON t.livestock_varieties_id = v.id
-        where t.user_id=#{userId} and  t.dept_id=#{deptId}
-        GROUP BY v.livestock_varieties;
+                 INNER JOIN agro_livestock_varieties as v ON t.livestock_varieties_id = v.id
 
+            ${params.dataScope}
+        GROUP BY t.dept_id, t.user_id,v.livestock_varieties;
     </select>
 
 
