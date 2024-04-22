@@ -100,6 +100,8 @@ public class PushCallback implements MqttCallback {
               logger.info("返回值 : " + result);
           } catch (JsonProcessingException e) {
               e.printStackTrace();
+              logger.error("mqtt处理设备消息报错", e);
+
           }
       });
  }

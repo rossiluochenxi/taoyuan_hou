@@ -56,9 +56,13 @@ public class MqttPushClient {
                 client.connect(options);
             } catch (Exception e) {
                 e.printStackTrace();
+                logger.error("连接到MQTT代理时出错", e);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("连接到MQTT代理时出错", e);
+
         }
     }
 
@@ -86,9 +90,11 @@ public class MqttPushClient {
             return success();
         } catch (MqttPersistenceException e) {
             e.printStackTrace();
+            logger.error("发布topic报错", e);
             return error();
         } catch (MqttException e) {
             e.printStackTrace();
+            logger.error("发布topic报错", e);
             return error();
         }
     }
@@ -104,7 +110,9 @@ public class MqttPushClient {
         try {
             MqttPushClient.getClient().subscribe(topic, qos);
         } catch (MqttException e) {
-            e.printStackTrace();
+           e.printStackTrace();
+            logger.error("订阅主题报错", e);
+
 
         }
     }
