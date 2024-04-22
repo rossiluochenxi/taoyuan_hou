@@ -13,8 +13,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author 罗晨熙
  * @date 2024-03-14
  */
-public class AgroLivestock extends BaseEntity
-{
+public class AgroLivestock extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键id */
