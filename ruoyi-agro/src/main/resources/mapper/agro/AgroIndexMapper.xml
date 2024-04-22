@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agro.mapper.AgroIndexMapper">
+
+    <resultMap type="AgroIndexVar" id="AgroIndexVarResult">
+        <result property="varietiesNum"    column="varieties_num"    />
+        <result property="livestockVarieties"    column="livestock_varieties"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+
+    <select id="selectIndexVarList"   parameterType="AgroIndexVar" resultMap="AgroIndexVarResult">
+        SELECT COUNT(*) as varieties_num, v.livestock_varieties
+        FROM agro_livestock as t
+        INNER JOIN agro_livestock_varieties as v ON t.livestock_varieties_id = v.id
+        where t.user_id=#{userId} and  t.dept_id=#{deptId}
+        GROUP BY v.livestock_varieties;
+
+    </select>
+
+
+
+
+
+</mapper>
