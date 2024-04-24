@@ -13,14 +13,34 @@
 
 
     <select id="selectIndexVarList"   parameterType="AgroIndexVar" resultMap="AgroIndexVarResult">
-        SELECT t.dept_id, t.user_id, COUNT(*) as varieties_num, v.livestock_varieties
-        FROM agro_livestock as t
-                 INNER JOIN agro_livestock_varieties as v ON t.livestock_varieties_id = v.id
 
+        SELECT COUNT(1) AS varieties_num, livestock_varieties
+        FROM agro_livestock as t
+        <where>
             ${params.dataScope}
-        GROUP BY t.dept_id, t.user_id,v.livestock_varieties;
+        </where>
+        GROUP BY livestock_varieties
     </select>
 
+
+
+        <resultMap type="AgroRankingFarmers" id="AgroRankingFarmersResult">
+            <result property="num"    column="num"    />
+            <result property="agroUserName"    column="agro_user_name"    />
+            <result property="userId"    column="user_id"    />
+            <result property="deptId"    column="dept_id"    />
+        </resultMap>
+
+
+        <select id="selectIndexUserNumList"   parameterType="AgroRankingFarmers" resultMap="AgroRankingFarmersResult">
+            SELECT COUNT(1) AS num, agro_user_name
+            FROM agro_livestock as t
+            <where>
+            ${params.dataScope}
+            </where>
+
+            GROUP BY agro_user_name
+        </select>
 
 
 

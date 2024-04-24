@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.agro.domain.AgroIndexVar;
+import com.ruoyi.agro.domain.AgroRankingFarmers;
 import com.ruoyi.agro.service.IAgroIndexService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class AgroIndexController extends BaseController {
     /**
      * 查询牲畜档案管理列表
      */
-//    @PreAuthorize("@ss.hasPermi('agro:index:list')")
     @GetMapping("/list")
     public TableDataInfo list(AgroIndexVar agroIndexVar) {
 //        agroIndexVar.setUserId(getUserId().toString());
@@ -34,7 +34,16 @@ public class AgroIndexController extends BaseController {
      return getDataTable(list);
     }
 
+    /**
+     * 查询养殖户牲畜排名
+     */
+    @GetMapping("/agroNumlist")
+    public TableDataInfo agroNumlist(AgroRankingFarmers agroRankingFarmers) {
 
+        List<AgroRankingFarmers> list = agroIndexService.selectIndexUserNumList(agroRankingFarmers);
+
+        return getDataTable(list);
+    }
 
 
 
