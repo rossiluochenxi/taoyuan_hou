@@ -110,8 +110,8 @@ public class DmAlarmData extends BaseEntity
     private String pci;
 
     /** 报警时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "上传时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "报警时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     /** 部门id */
