@@ -129,6 +129,7 @@ public class DmDataServiceImpl implements IDmDataService {
         dmData.setDeviceId(jsonNode.get("deviceId").asText());
         BigDecimal temperature = new BigDecimal(jsonNode.get("temperature").asText());
         dmData.setTemperature(temperature);
+
         dmData.setStep(jsonNode.get("step").asText());
         BigDecimal weight = new BigDecimal(jsonNode.get("weight").asText());
         dmData.setWeight(weight);

@@ -19,6 +19,8 @@ public class BusinessServiceImpl implements BusinessService {
     private DmDayDataServiceImpl dmDayDataServiceImpl;
     @Autowired
     private DmRtdataServiceImpl dmRtdataServiceImpl;
+    @Autowired
+    private DmAlarmDataServiceImpl dmAlarmDataServiceImpl;
     private static final Logger LOGGER = LoggerFactory.getLogger(BusinessService.class);
 
     /**
@@ -37,6 +39,8 @@ public class BusinessServiceImpl implements BusinessService {
         dmDayDataServiceImpl.deviceInsertDmDayData(mqttobj);
         //全部数据
         dmDataServiceImpl.deviceInsertDmData(mqttobj);
+        //报警数据判断添加
+        dmAlarmDataServiceImpl.deviceInsertAlarmData(mqttobj);
 
         return "1";
     }
