@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.agro.domain.AgroLivestock;
 import com.ruoyi.agro.service.impl.AgroLivestockServiceImpl;
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.mqtt.Mqttobj;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -51,6 +52,7 @@ public class DmAlarmDataServiceImpl implements IDmAlarmDataService
      * @return 报警数据
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<DmAlarmData> selectDmAlarmDataList(DmAlarmData dmAlarmData)
     {
         return dmAlarmDataMapper.selectDmAlarmDataList(dmAlarmData);

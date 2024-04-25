@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDmAlarmDataVo">
-        select id, create_by, create_time, update_by, update_time, info, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, device_type, imei, device_id, temperature, step, drycell, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, date, dept_id, user_id from dm_alarm_data
+        select id, create_by, create_time, update_by, update_time, info, agro_user_id, agro_user_name, agro_livestock_id, agro_livestock_code, agro_livestock_iccid, agro_livestock_xqiccid, device_type, imei, device_id, temperature, step, drycell, weight, livestock_lon, livestock_lat, rsrq, ecl, cellid, snr, rsrp, pci, date, dept_id, user_id from dm_alarm_data t
     </sql>
 
     <select id="selectDmAlarmDataList" parameterType="DmAlarmData" resultMap="DmAlarmDataResult">
@@ -69,6 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="date != null "> and date = #{date}</if>
             <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            ${params.dataScope}
+
         </where>
     </select>
     
