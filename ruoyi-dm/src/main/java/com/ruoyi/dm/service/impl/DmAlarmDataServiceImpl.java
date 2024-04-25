@@ -171,4 +171,8 @@ public class DmAlarmDataServiceImpl implements IDmAlarmDataService
         return null;
     }
 
+    @Override
+    public List<DmAlarmData> selectDmAlarmIndexDataList(DmAlarmData dmAlarmData) {
+        return dmAlarmDataMapper.selectDmAlarmIndexDataList(dmAlarmData) ;   }
+
 }

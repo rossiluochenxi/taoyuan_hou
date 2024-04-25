@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="date"    column="date"    />
         <result property="deptId"    column="dept_id"    />
         <result property="userId"    column="user_id"    />
+        <result property="livestockVarieties"    column="livestock_varieties"    />
     </resultMap>
 
     <sql id="selectDmAlarmDataVo">
@@ -193,4 +194,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectDmAlarmIndexDataList" parameterType="DmAlarmData" resultMap="DmAlarmDataResult">
+        SELECT
+        t.id,
+        t.create_by,
+        t.create_time,
+        t.update_by,
+        t.update_time,
+        t.info,
+        t.agro_user_id,
+        t.agro_user_name,
+        t.agro_livestock_id,
+        t.agro_livestock_code,
+        t.agro_livestock_iccid,
+        t.agro_livestock_xqiccid,
+        t.device_type,
+        t.imei,
+        t.device_id,
+        t.temperature,
+        t.step,
+        t.drycell,
+        t.weight,
+        t.livestock_lon,
+        t.livestock_lat,
+        t.rsrq,
+        t.ecl,
+        t.cellid,
+        t.snr,
+        t.rsrp,
+        t.pci,
+        t.date,
+        t.dept_id,
+        t.user_id,
+        a.livestock_varieties
+        FROM dm_alarm_data AS t
+        LEFT JOIN agro_livestock AS a ON t.agro_livestock_id = a.id
+        <where>
+            t.date >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);
+            ${params.dataScope}
+
+        </where>
+    </select>
 </mapper>

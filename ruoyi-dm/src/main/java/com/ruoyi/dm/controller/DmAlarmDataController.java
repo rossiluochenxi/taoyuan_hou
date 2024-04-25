@@ -101,4 +101,15 @@ public class DmAlarmDataController extends BaseController
     {
         return toAjax(dmAlarmDataService.deleteDmAlarmDataByIds(ids));
     }
+
+    /**
+     * 查询报警数据列表
+     */
+    @GetMapping("/indexList")
+    public TableDataInfo indexList(DmAlarmData dmAlarmData)
+    {
+        List<DmAlarmData> list = dmAlarmDataService.selectDmAlarmIndexDataList(dmAlarmData);
+        return getDataTable(list);
+    }
+
 }

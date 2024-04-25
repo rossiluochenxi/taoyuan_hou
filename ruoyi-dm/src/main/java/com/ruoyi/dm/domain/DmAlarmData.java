@@ -33,6 +33,18 @@ public class DmAlarmData extends BaseEntity
     @Excel(name = "养殖户")
     private String agroUserName;
 
+    public String getLivestockVarieties() {
+        return livestockVarieties;
+    }
+
+    public void setLivestockVarieties(String livestockVarieties) {
+        this.livestockVarieties = livestockVarieties;
+    }
+
+    /** 牲畜品种 */
+    @Excel(name = "牲畜品种")
+    private String livestockVarieties;
+
     /** 牲畜档案id */
     @Excel(name = "牲畜档案id")
     private String agroLivestockId;

@@ -69,5 +69,13 @@ public interface IDmAlarmDataService
 
     public String deviceInsertAlarmData(Mqttobj mqttobj) throws JsonProcessingException;
 
+    /**
+     * 首页查询
+     *
+     * @param dmAlarmData 报警数据
+     * @return 报警数据集合
+     */
+    public List<DmAlarmData> selectDmAlarmIndexDataList(DmAlarmData dmAlarmData);
+
 
 }

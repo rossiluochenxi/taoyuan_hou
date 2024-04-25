@@ -58,4 +58,10 @@ public interface DmAlarmDataMapper
      * @return 结果
      */
     public int deleteDmAlarmDataByIds(String[] ids);
+
+    public List<DmAlarmData> selectDmAlarmIndexDataList(DmAlarmData dmAlarmData);
+
+
+
+
 }
