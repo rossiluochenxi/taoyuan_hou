@@ -231,7 +231,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM dm_alarm_data AS t
         LEFT JOIN agro_livestock AS a ON t.agro_livestock_id = a.id
         <where>
-            t.date >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);
+            t.date >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)
             ${params.dataScope}
 
         </where>

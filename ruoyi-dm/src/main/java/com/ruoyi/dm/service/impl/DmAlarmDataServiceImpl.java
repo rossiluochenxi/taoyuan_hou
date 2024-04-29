@@ -172,6 +172,7 @@ public class DmAlarmDataServiceImpl implements IDmAlarmDataService
     }
 
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<DmAlarmData> selectDmAlarmIndexDataList(DmAlarmData dmAlarmData) {
         return dmAlarmDataMapper.selectDmAlarmIndexDataList(dmAlarmData) ;   }
 
