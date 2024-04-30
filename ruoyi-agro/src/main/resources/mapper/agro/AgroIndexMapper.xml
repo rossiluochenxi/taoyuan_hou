@@ -44,5 +44,46 @@
 
 
 
+    <resultMap type="AgroOnOffLineDevice" id="AgroOnOffLineDeviceResult">
+        <result property="agroLivestockIccid"    column="agro_livestock_iccid"    />
+        <result property="deviceType"    column="device_type"    />
+        <result property="deviceStatus"    column="device_state"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+
+
+    <select id="selectEbOnOffLineDevice"   parameterType="AgroOnOffLineDevice" resultMap="AgroOnOffLineDeviceResult">
+        SELECT
+        agro_livestock_iccid,
+        device_type,
+        CASE
+        WHEN date >= NOW() - INTERVAL 2 DAY THEN '在线'
+        ELSE '离线'
+        END AS device_state
+        FROM dm_rtdata t
+        <where>
+            device_type = '耳标' ${params.dataScope}
+        </where>
+
+    </select>
+
+
+    <select id="selectXqOnOffLineDevice"   parameterType="AgroOnOffLineDevice" resultMap="AgroOnOffLineDeviceResult">
+        SELECT
+        agro_livestock_iccid,
+        device_type,
+        CASE
+        WHEN date >= NOW() - INTERVAL 2 DAY THEN '在线'
+        ELSE '离线'
+        END AS device_state
+        FROM dm_rtdata t
+        <where>
+            device_type = '项圈' ${params.dataScope}
+        </where>
+
+    </select>
+
 
 </mapper>

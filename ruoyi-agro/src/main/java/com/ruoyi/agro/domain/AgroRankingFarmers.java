@@ -3,7 +3,7 @@ package com.ruoyi.agro.domain;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 养殖户排名
+ * 查询养殖户排名对象
  *
  * @author 小江
  * @date 2024-04-24

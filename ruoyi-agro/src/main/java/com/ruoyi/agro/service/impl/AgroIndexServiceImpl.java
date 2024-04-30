@@ -2,6 +2,7 @@ package com.ruoyi.agro.service.impl;
 
 import com.ruoyi.agro.domain.AgroIndexVar;
 import com.ruoyi.agro.domain.AgroLivestockVarieties;
+import com.ruoyi.agro.domain.AgroOnOffLineDevice;
 import com.ruoyi.agro.domain.AgroRankingFarmers;
 import com.ruoyi.agro.mapper.AgroIndexMapper;
 import com.ruoyi.agro.service.IAgroIndexService;
@@ -35,6 +36,21 @@ public class AgroIndexServiceImpl implements IAgroIndexService {
      public List<AgroRankingFarmers> selectIndexUserNumList(AgroRankingFarmers agroRankingFarmers) {
 
         return agroIndexMapper.selectIndexUserNumList(agroRankingFarmers);
+    }
+
+    @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
+    public List<AgroRankingFarmers> selectEbOnOffLineDevice(AgroOnOffLineDevice agroOnOffLineDevice) {
+
+        return  agroIndexMapper.selectEbOnOffLineDevice(agroOnOffLineDevice);
+    }
+
+    @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
+    public List<AgroRankingFarmers> selectXqOnOffLineDevice(AgroOnOffLineDevice agroOnOffLineDevice) {
+
+
+        return    agroIndexMapper.selectXqOnOffLineDevice(agroOnOffLineDevice);
     }
 
 }

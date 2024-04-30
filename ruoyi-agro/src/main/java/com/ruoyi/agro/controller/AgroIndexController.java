@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.agro.domain.AgroIndexVar;
+import com.ruoyi.agro.domain.AgroOnOffLineDevice;
 import com.ruoyi.agro.domain.AgroRankingFarmers;
 import com.ruoyi.agro.service.IAgroIndexService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,6 +46,29 @@ public class AgroIndexController extends BaseController {
         return getDataTable(list);
     }
 
+
+    /**
+     * 统计设备耳标在线离线
+     */
+    @GetMapping("/ebOnOffLineDevice")
+    public TableDataInfo ebOnOffLineDevice(AgroOnOffLineDevice agroOnOffLineDevice) {
+
+       List<AgroRankingFarmers> list = agroIndexService.selectEbOnOffLineDevice(agroOnOffLineDevice);
+
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 统计设备项圈在线离线
+     */
+    @GetMapping("/xqOnOffLineDevice")
+    public TableDataInfo xqOnOffLineDevice(AgroOnOffLineDevice agroOnOffLineDevice) {
+
+      List<AgroRankingFarmers> list = agroIndexService.selectXqOnOffLineDevice(agroOnOffLineDevice);
+
+        return getDataTable(list);
+    }
 
 
 
