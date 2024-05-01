@@ -28,8 +28,7 @@ public class AgroIndexController extends BaseController {
      */
     @GetMapping("/list")
     public TableDataInfo list(AgroIndexVar agroIndexVar) {
-//        agroIndexVar.setUserId(getUserId().toString());
-//        agroIndexVar.setDeptId(getDeptId().toString());
+
      List<AgroIndexVar> list = agroIndexService.selectIndexVarList(agroIndexVar);
 
      return getDataTable(list);
