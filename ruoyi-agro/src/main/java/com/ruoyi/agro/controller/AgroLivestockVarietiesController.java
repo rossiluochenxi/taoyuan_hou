@@ -47,6 +47,17 @@ public class AgroLivestockVarietiesController extends BaseController
     }
 
     /**
+     * 查询牲畜品种管理列表（不分页）
+     */
+    @PreAuthorize("@ss.hasPermi('agro:livestockVarieties:list')")
+    @GetMapping("/listLivestockVarietiesQuery")
+    public TableDataInfo listLivestockVarietiesQuery(AgroLivestockVarieties agroLivestockVarieties)
+    {
+        List<AgroLivestockVarieties> list = agroLivestockVarietiesService.selectAgroLivestockVarietiesList(agroLivestockVarieties);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出牲畜品种管理列表
      */
     @PreAuthorize("@ss.hasPermi('agro:livestockVarieties:export')")

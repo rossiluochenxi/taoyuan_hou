@@ -46,6 +46,16 @@ public class AgroUserController extends BaseController {
     }
 
     /**
+     * 查询养殖户管理列表（不分页）
+     */
+    @PreAuthorize("@ss.hasPermi('agro:user:list')")
+    @GetMapping("/listUserQuery")
+    public TableDataInfo listUserQuery(AgroUser agroUser) {
+        List<AgroUser> list = agroUserService.selectAgroUserList(agroUser);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出养殖户管理列表
      */
     @PreAuthorize("@ss.hasPermi('agro:user:export')")
